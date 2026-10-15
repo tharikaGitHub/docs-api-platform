@@ -1,4 +1,4 @@
-# Copyright (c) 2025, WSO2 LLC. (http://www.wso2.com) All Rights Reserved.
+# Copyright (c) 2026, WSO2 LLC. (http://www.wso2.com) All Rights Reserved.
 #
 # WSO2 LLC. licenses this file to you under the Apache License,
 # Version 2.0 (the "License"); you may not use this file except
@@ -22,13 +22,13 @@ site_url: https://wso2.com/api-platform/docs
 
 
 # Repository
-repo_name: wso2/docs-bijira
-repo_url: https://github.com/wso2/docs-bijira
-edit_uri: https://github.com/wso2/docs-bijira/edit/main/en/docs/
+repo_name: wso2/docs-api-platform
+repo_url: https://github.com/wso2/docs-api-platform
+edit_uri: https://github.com/wso2/docs-api-platform/edit/cloud-api-platform/en/docs/
 dev_addr: localhost:8000
 
 # Copyright
-copyright: ©2025 WSO2 LLC.
+copyright: ©2026 WSO2 LLC.
 
 # Configuration
 watch:
@@ -72,271 +72,64 @@ theme:
     logo: logo
 #Breaks build if there's a warning
 strict: false
+
 # Navigation
+#
+# First cut for the new API Platform Cloud (branch: cloud-api-platform).
+# Every page has a comment saying where its content comes from:
+#   "from: <path>"  adapt the Bijira page at that path (cloud branch, en/docs/)
+#   "new"           no Bijira equivalent; write from scratch
+# Lines commented out with "pending:" are candidates that are not in the
+# release feature list yet; enable them once the feature is confirmed.
 nav:
+  # Overview and Get Started are platform-common pages; theme.js rewrites
+  # these links from root-index.json's _platformCommonBase at runtime.
   - Overview: https://50dcbee2-0809-4bf1-801f-b820c18e9816.e1-us-east-azure.choreoapps.dev/
   - Get Started: https://50dcbee2-0809-4bf1-801f-b820c18e9816.e1-us-east-azure.choreoapps.dev/get-started/
   - Cloud:
     - Introduction:
-        - What is API Platform Cloud?: introduction/what-is-bijira.md
-        - Quick Start Guide:
-          - API Proxy: introduction/quick-start-guide.md
-          - MCP Server: introduction/quick-start-guide-mcp.md
-        - Concepts:
-          # - Resource Hierarchy: resource-hierarchy.md
-          - Organization: bijira-concepts/organization.md
-          - Project: bijira-concepts/project.md
-          # - Deployment Tracks: bijira-concepts/deployment-tracks.md
-          - Data Planes: bijira-concepts/data-planes.md
-    - Create API Proxy:
-        - Overview: create-api-proxy/overview.md
-        - My APIs (Ingress):
-            - REST APIs:
-                - Create with GenAI: create-api-proxy/my-apis/http/create-with-genai.md
-                - Import API Contract: create-api-proxy/my-apis/http/import-api-contract.md
-                - Import API Contract from GitHub: create-api-proxy/my-apis/http/import-api-from-github.md
-                - Start with Endpoint: create-api-proxy/my-apis/http/start-with-endpoint.md
-                - Start from Scratch: create-api-proxy/my-apis/http/start-from-scratch.md
-            - WebSocket APIs:
-                - Create with GenAI: create-api-proxy/my-apis/websocket/create-with-genai.md
-                - Import API Contract: create-api-proxy/my-apis/websocket/import-api-contract.md
-                - Start with Endpoint: create-api-proxy/my-apis/websocket/start-with-endpoint.md
-                - Start from Scratch: create-api-proxy/my-apis/websocket/start-from-scratch.md
-                - Limitations: create-api-proxy/my-apis/websocket/quotas-and-limitations.md
-            - GraphQL APIs:
-                - Import API Contract: create-api-proxy/my-apis/graphql/import-api-contract.md
-                - Start with Endpoint: create-api-proxy/my-apis/graphql/start-with-endpoint.md
-        - Third Party APIs (Egress):
-            - AI APIs:
-                - Overview: create-api-proxy/third-party-apis/ai-apis.md
-                - Providers:
-                    - OpenAI: create-api-proxy/third-party-apis/open-ai.md
-                    - Azure OpenAI: create-api-proxy/third-party-apis/azure-ai.md
-                    - Mistral: create-api-proxy/third-party-apis/mistral.md
-                    - AWS Bedrock: create-api-proxy/third-party-apis/awsbedrock.md
-                    - Anthropic: create-api-proxy/third-party-apis/claude.md
-                - Policies:
-                    - Token-Based Rate Limit: create-api-proxy/third-party-apis/token-ratelimit.md
-                    - Guardrails:
-                        - Overview: create-api-proxy/third-party-apis/guardrails.md
-                        # - Basic Guardrails:
-                        - Regex Guardrail: create-api-proxy/third-party-apis/guardrails/basic-guardrails/regex-guardrail.md
-                        - Word Count Guardrail: create-api-proxy/third-party-apis/guardrails/basic-guardrails/word-count-guardrail.md
-                        - Sentence Count Guardrail: create-api-proxy/third-party-apis/guardrails/basic-guardrails/sentence-count-guardrail.md
-                        - Content Length Guardrail: create-api-proxy/third-party-apis/guardrails/basic-guardrails/content-length-guardrail.md
-                        - URL Guardrail: create-api-proxy/third-party-apis/guardrails/basic-guardrails/url-guardrail.md
-                        - Regex PII Masking: create-api-proxy/third-party-apis/guardrails/basic-guardrails/regex-pii-masking.md
-                        # - Advanced Guardrails:
-                        - PII Masking: create-api-proxy/third-party-apis/guardrails/advanced-guardrails/pii-masking.md
-                        # - Third Party Guardrail Integrations:
-                        - Azure Content Safety Content Moderation: create-api-proxy/third-party-apis/guardrails/third-party-guardrail-integrations/azure-content-safety-content-moderation.md
-                        - AWS Bedrock Guardrail: create-api-proxy/third-party-apis/guardrails/third-party-guardrail-integrations/aws-bedrock-guardrail.md
-                    - Semantic Cache: create-api-proxy/third-party-apis/semantic-cache.md
-            - Get from Marketplace: create-api-proxy/third-party-apis/get-from-marketplace.md
-            - Import API Contract: create-api-proxy/third-party-apis/import-api-contract.md
-    - Develop API Proxy:
-        - Authentication and Authorization:
-            - Secure API Access with Asgardeo: develop-api-proxy/authentication-and-authorization/secure-api-access-with-asgardeo.md
-            - Secure API Access with API Platform STS: develop-api-proxy/authentication-and-authorization/secure-api-access-with-bijira-sts.md
-            - Secure API Access with Azure AD: develop-api-proxy/authentication-and-authorization/secure-api-access-with-azure-ad.md
-            - Secure API Access with an External Key Manager: develop-api-proxy/authentication-and-authorization/secure-api-access-with-external-idp.md
-            - Secure Communication Between the API Platform Gateway and Your Backend with OAuth2: develop-api-proxy/authentication-and-authorization/secure-communication-between-bijira-gateway-and-backend-with-oauth2.md
-            - Secure Communication Between the API Platform Gateway and Your Backend with Mutual TLS: develop-api-proxy/authentication-and-authorization/secure-communication-between-the-bijira-gateway-and-your-backend-with-mutual-tls.md
-        - Policy:
-            - Overview: develop-api-proxy/policy/overview.md
-            - Policies: develop-api-proxy/policy/policies.md
-            - Attach and Manage Policies: develop-api-proxy/policy/attach-and-manage-policies.md
-          # - Apply Advanced Settings on Mediation Policies: develop-api-proxy/policy/apply-advanced-settings-on-mediation-policies.md
-        - Documents: develop-api-proxy/documents.md
-        - Make an API AI-Ready: develop-api-proxy/make-api-ai-ready.md
-        - Lifecycle: develop-api-proxy/lifecycle-management.md
-        - Subscription Plans: develop-api-proxy/subscription-plans.md
-    - Test API Proxy:
-        - OpenAPI Console: test-api-proxy/openapi-console.md
-        - WebSocket Console: test-api-proxy/ws-test-console.md
-        - GraphQL Console: test-api-proxy/graphql-console.md
-        - cURL: test-api-proxy/curl.md
-        - API Chat: test-api-proxy/api-chat.md
-    - MCP Servers:
-        - Overview: mcp-servers/get-started-with-mcp.md
-        - Design MCP Servers: mcp-servers/design-mcp-servers.md
-        - Proxy Remote MCP Servers: mcp-servers/proxy-remote-servers.md
-        - Customize Developer Portal as an MCP Hub: mcp-servers/devportal-mcp-hub.md
-    - API Governance:
-        - API Governance Overview: governance/overview.md
-        - Govern API Proxy: governance/govern-api-proxy.md
-    - AI Gateway:
-        - Overview: ai-gateway/overview.md
-        - LLM:
-          - Quick Start Guide: ai-gateway/llm/quick-start-guide.md
-          - LLM Provider Templates: ai-gateway/llm/llm-templates.md
-          - Guardrails:
-            - AWS Bedrock Guardrail: ai-gateway/llm/guardrails/aws-bedrock-guardrail.md
-            - Azure Content Safety: ai-gateway/llm/guardrails/azure-content-safety.md
-            - Content Length Guardrail: ai-gateway/llm/guardrails/content-length.md
-            - JSON Schema Guardrail: ai-gateway/llm/guardrails/json-schema.md
-            - PII Masking Regex Guardrail: ai-gateway/llm/guardrails/pii-masking-regex.md
-            - Regex Guardrail: ai-gateway/llm/guardrails/regex.md
-            - Semantic Prompt Guardrail: ai-gateway/llm/guardrails/semantic-prompt-guard.md
-            - Semantic Tool Filtering: ai-gateway/llm/guardrails/semantic-tool-filtering.md
-            - Sentence Count Guardrail: ai-gateway/llm/guardrails/sentence-count.md
-            - URL Guardrail: ai-gateway/llm/guardrails/url.md
-            - Word Count Guardrail: ai-gateway/llm/guardrails/word-count.md
-          - Load Balancing:
-            - Model Round Robin: ai-gateway/llm/load-balancing/model-round-robin.md
-            - Model Weighted Round Robin: ai-gateway/llm/load-balancing/model-weighted-round-robin.md
-          - Prompt Management:
-            - Prompt Decorator: ai-gateway/llm/prompt-management/prompt-decorator.md
-            - Prompt Template: ai-gateway/llm/prompt-management/prompt-template.md
-          - Semantic Caching: ai-gateway/llm/semantic-caching.md
-        - MCP:
-          - Quick Start Guide: ai-gateway/mcp/quick-start-guide.md
-          - Policies:
-            - MCP Access Control List: ai-gateway/mcp/policies/mcp-acl-list.md
-            - MCP Authentication: ai-gateway/mcp/policies/mcp-authentication.md
-            - MCP Authorization: ai-gateway/mcp/policies/mcp-authorization.md
-            - MCP Rewrite: ai-gateway/mcp/policies/mcp-rewrite.md
-        - Observability:
-          - Logging: ai-gateway/observability/logging.md
-          - Tracing: ai-gateway/observability/tracing.md
-        - Analytics:
-          - Moesif Analytics: ai-gateway/analytics/moesif-analytics.md
-          - Analytics Header Filter: ai-gateway/analytics/analytics-header-filter.md
-    - AI Workspace:
-        - Overview: ai-workspace/overview.md
-        - Quickstart: ai-workspace/quickstart.md
-        - Getting Started: ai-workspace/getting-started.md
-        - AI Gateways:
-            - Setting Up: ai-workspace/ai-gateways/setting-up.md
-        - LLM Providers:
-            - Overview: ai-workspace/llm-providers/overview.md
-            - Configure Provider: ai-workspace/llm-providers/configure-provider.md
-            - Manage Provider: ai-workspace/llm-providers/manage-provider.md
-        - App LLM Proxies:
-            - Overview: ai-workspace/llm-proxies/overview.md
-            - Configure App LLM Proxy: ai-workspace/llm-proxies/configure-proxy.md
-            - Manage App LLM Proxy: ai-workspace/llm-proxies/manage-proxy.md
-        - MCP Proxies:
-            - Overview: ai-workspace/mcp-proxies/overview.md
-            - Configure Proxy: ai-workspace/mcp-proxies/configure-proxy.md
-            - Apply Policies: ai-workspace/mcp-proxies/apply-policies.md
-        - MCP Registry:
-            - What is an MCP Registry?: mcp-servers/mcp-registry.md
-            - Publish MCP Proxies: mcp-servers/publish-mcp-proxies.md
-            - Browse the MCP Hub: mcp-servers/browse-mcp-hub.md
-            - Use the MCP Registry API: mcp-servers/mcp-registry-api.md
-        - GenAI Applications: ai-workspace/genai-applications.md
-        - Configure Inbound Auth: ai-workspace/configure-inbound-auth.md
-        - Invoke via SDKs: ai-workspace/using-sdks.md
-  #      - Insights: ai-workspace/insights.md
+        - What is API Platform Cloud?: cloud/index.md                                  # from: introduction/what-is-bijira.md
+        - Key Concepts: cloud/introduction/key-concepts.md                             # from: bijira-concepts/organization.md, project.md, data-planes.md
+    - Getting Started:
+        - Sign Up and Activate Your Subscription: cloud/getting-started/sign-up.md     # new
+        - Sign In and Organizations: cloud/getting-started/sign-in-and-organizations.md  # from: bijira-concepts/organization.md, administer/configure-enterprise-login/configure-enterprise-login.md
+        - Tour of the Management Portal: cloud/getting-started/management-portal-tour.md  # new
+        - Quick Start Guide: cloud/getting-started/quick-start-guide.md                # from: introduction/quick-start-guide.md
+    - Develop APIs:
+        - Create an API: cloud/develop-apis/create-an-api.md                           # from: create-api-proxy/overview.md and create-api-proxy/my-apis/** (only the API types and methods supported at launch)
         - Policies:
-            - Overview: ai-workspace/policies/overview.md
-            - Guardrails:
-                - Overview: ai-workspace/policies/guardrails/overview.md
-  #              - Semantic Prompt Guard: ai-workspace/policies/guardrails/semantic-prompt-guard.md
-                - PII Masking Regex: ai-workspace/policies/guardrails/regex-pii-masking.md
-                - Azure Content Safety: ai-workspace/policies/guardrails/azure-content-safety.md
-                - Word Count: ai-workspace/policies/guardrails/word-count-guardrail.md
-                - Sentence Count: ai-workspace/policies/guardrails/sentence-count-guardrail.md
-            - Rate Limit:
-                - LLM Cost: ai-workspace/policies/rate-limit/llm-cost.md
-                - Token-Based Rate Limit: ai-workspace/policies/rate-limit/token-based-rate-limit.md
-                - LLM Cost-Based Rate Limit: ai-workspace/policies/rate-limit/llm-cost-based-rate-limit.md
-            - Other Policies:
-  #              - Token-Based Rate Limit: ai-workspace/policies/other-policies/token-based-rate-limit.md
-  #              - Rate Limit - Basic: ai-workspace/policies/other-policies/basic-rate-limit.md
-                - Model Round Robin: ai-workspace/policies/other-policies/model-round-robin.md
-                - Prompt Decorator: ai-workspace/policies/other-policies/prompt-decorator.md
-                - Prompt Template: ai-workspace/policies/other-policies/prompt-template.md
-                - Semantic Cache: ai-workspace/policies/other-policies/semantic-cache.md
-            - Writing an AI Policy: ai-workspace/policies/writing-an-ai-policy.md
-    - Event Gateway:
-        - Overview: event-gateway/overview.md
-        - Getting Started: event-gateway/getting-started.md
-        - Setting Up: event-gateway/setting-up.md
-        - Publish APIs:
-          - Overview: event-gateway/publish-apis/overview.md
-          - Subscription Based APIs: event-gateway/publish-apis/subscription-based-apis.md
-          - Subscription Less APIs: event-gateway/publish-apis/subscription-less-apis.md
-          - Lifecycle Management: event-gateway/publish-apis/lifecycle-management.md
-        - Troubleshooting: event-gateway/troubleshooting.md
-    - API Gateway:
-        # - Overview: api-platform-gateway/overview.md
-        # - API Platform Cloud Gateway: api-platform-gateway/cloud-gateway.md
-        - Self-Hosted Gateway:
-            - Architecture: api-platform-gateway/architecture.md
-            - Getting Started: api-platform-gateway/getting-started.md
-            - Setting Up: api-platform-gateway/setting-up.md
-            - Adding and Managing Policies: api-platform-gateway/manage-policies.md
-            - Custom Policies:
-                - Writing a Custom Policy: api-platform-gateway/writing-a-custom-policy.md
-                - Building the Gateway with Custom Policies: api-platform-gateway/build-gateway-with-custom-policies.md
-                - Apply Custom Policies to APIs: api-platform-gateway/apply-custom-policies-to-apis.md
-            - Publish APIs:
-              - Overview: api-platform-gateway/publish-apis/overview.md
-              - Subscription Based APIs: api-platform-gateway/publish-apis/subscription-based-apis.md
-              - Subscription Less APIs: api-platform-gateway/publish-apis/subscription-less-apis.md
-              - Lifecycle Management: api-platform-gateway/publish-apis/lifecycle-management.md
-            - High Availability: api-platform-gateway/high-availability.md
-            # - Analytics: api-platform-gateway/analytics.md
-            # - Troubleshooting: api-platform-gateway/troubleshooting.md
-        - Third-Party Gateways:
-            - Overview: federation/overview.md
-            - Discover APIs from AWS API Gateway: federation/api-discovery-aws.md
-    - Monitor and Insights:
-        - Logs: 
-          - Overview: monitoring-and-insights/logs/overview.md
-          - Runtime Logs: monitoring-and-insights/logs/runtime-logs.md
-          - Audit Logs: monitoring-and-insights/logs/audit-logs.md
-        - Insights: monitoring-and-insights/insights.md
-        - Compliance Dashboard: monitoring-and-insights/compliance.md
-        - Integrate API Platform with Moesif: monitoring-and-insights/integrate-bijira-with-moesif.md
-        - API Platform Status Page: monitoring-and-insights/status-page.md
+            - Apply Policies: cloud/develop-apis/policies/apply-policies.md             # from: develop-api-proxy/policy/overview.md, policies.md, attach-and-manage-policies.md
+            - Configure Policy System Parameters: cloud/develop-apis/policies/configure-system-parameters.md  # new
+            - Custom Policies: cloud/develop-apis/policies/custom-policies.md           # from: api-platform-gateway/apply-custom-policies-to-apis.md
+            - Build a Custom Policy with Go: cloud/develop-apis/policies/build-a-custom-policy-with-go.md  # from: api-platform-gateway/writing-a-custom-policy.md, build-gateway-with-custom-policies.md (only if Go extensibility ships for cloud)
+        # pending: - Test an API: cloud/develop-apis/test-an-api.md                     # from: test-api-proxy/openapi-console.md, curl.md
+    - Secure APIs:
+        - Secure APIs with OAuth 2.0: cloud/secure-apis/secure-apis-with-oauth2.md      # from: develop-api-proxy/authentication-and-authorization/secure-api-access-with-bijira-sts.md
+        - Manage Secrets: cloud/secure-apis/manage-secrets.md                          # new
+    - Deploy:
+        - Environments: cloud/deploy/environments.md                                   # from: administer/manage-environments/manage-environments.md
+        - Promote APIs Between Environments: cloud/deploy/promote-apis-between-environments.md  # from: administer/manage-cd-pipelines/manage-cd-pipelines.md
+        - Gateways:
+            - Internal and External Gateways: cloud/deploy/gateways/internal-and-external-gateways.md  # new (concept framing from bijira-concepts/data-planes.md)
+            - Custom Gateway Domains: cloud/deploy/gateways/custom-gateway-domains.md   # from: administer/settings/configure-a-custom-domain-for-your-organization.md (Bijira is per organization; this is per gateway)
+    - Publish and Consume:
+        - Publish APIs to the Developer Portal: cloud/publish-and-consume/publish-apis-to-the-developer-portal.md  # from: develop-api-proxy/lifecycle-management.md, api-platform-gateway/publish-apis/*.md
+        # pending: - Subscription Plans: cloud/publish-and-consume/subscription-plans.md  # from: develop-api-proxy/subscription-plans.md, administer/settings/create-api-subscription-plans.md
+        - Developer Portal: cloud/publish-and-consume/developer-portal.md              # from: devportal/** (keep short; link to the API Portal component docs)
+        - AI Workspace: cloud/publish-and-consume/ai-workspace.md                      # from: ai-workspace/overview.md (keep short; link to the AI Workspace component docs)
+    - Govern:
+        - API Governance: cloud/govern/api-governance.md                               # from: governance/overview.md, governance/govern-api-proxy.md
+    # pending: - Monitor:
+    # pending:     - Logs: cloud/monitor/logs.md                                         # from: monitoring-and-insights/logs/*.md
+    # pending:     - Status Page: cloud/monitor/status-page.md                           # from: monitoring-and-insights/status-page.md
     - Administer:
-        - Create API Subscription Plans: administer/settings/create-api-subscription-plans.md
-        - Configure a Custom Domain for Your Organization: administer/settings/configure-a-custom-domain-for-your-organization.md
-        - Manage Environments: administer/manage-environments/manage-environments.md
-        - Manage CD pipelines: administer/manage-cd-pipelines/manage-cd-pipelines.md
-        - Configure External Key Manager:
-          - Configure Asgardeo as an External Key Manager: administer/configure-an-external-idp/configure-asgardeo-as-an-external-idp.md
-          - Configure Azure as an External Key Manager: administer/configure-an-external-idp/configure-azure-ad-as-an-external-idp.md
-          - Configure Custom External Key Manager: administer/configure-an-external-idp/configure-custom-external-idp.md
-        - Configure Enterprise Login: administer/configure-enterprise-login/configure-enterprise-login.md
-        - Configure VPNs on API Platform Cloud Data Plane: administer/configure-vpns/configure-vpns.md
-    - Workflows:
-        - Configure Workflow Approvals: workflows/configure-workflow-approvals.md
-        - Submit Workflow Approval Requests: workflows/submit-workflow-requests.md
-        - Review Workflow Approval Requests: workflows/review-workflows-requests.md
-    - Tutorials:
-        - Expose a Service as a Managed API: tutorials/expose-a-service-as-a-managed-api.md
-        - Secure an API with RBAC: tutorials/secure-an-api-with-role-based-access-control.md
-    - API Platform Samples:
-        - Samples Overview: samples/samples-overview.md
-    - Developer Portal:
-        - Theming Developer Portal:
-            - Theming with AI: devportal/theming-devportal-with-ai.md
-            - Theming Manually:
-                - Theme in Organizational Level: devportal/theming-devportal-org-level.md
-                - Theme in API Level: devportal/theming-devportal-api-level.md
-            - Devportal Mode: devportal/developer-portal-mode.md
-        - AI Agent Discovery: devportal/discover-apis/ai-agent-discovery.md
-        - Discover APIs:
-            - Search APIs: devportal/discover-apis/api-search.md
-            - Documentations: devportal/discover-apis/api-documentations.md
-        - API Workflows:
-            - Consuming API Workflows: devportal/api-workflows/consuming-api-workflows.md
-        - Consume an API:
-            - Consume an API Secured with OAuth2: devportal/consuming-services/consume-an-api-secured-with-oauth2.md
-            - Consume an API Secured with API Key: devportal/consuming-services/consume-an-api-secured-with-api-key.md
-        - Manage Applications:
-            - Create an Application: devportal/manage-applications/create-an-application.md
-        - Manage Subscriptions:
-            - Subscribe to an API: devportal/manage-subscriptions/subscribe-to-an-api.md
-        - SDK Generation:
-            - AI Assisted SDK Generation: devportal/sdk-generation/ai-assisted-sdk-generation.md
-        - Admin Settings:
-            - LLM Instructions: devportal/admin-settings/llm-instructions.md
-            - Managing API Workflows: devportal/admin-settings/managing-api-workflows.md
+        - Users and Roles: cloud/administer/users-and-roles.md                         # new
+        - Event Notifications: cloud/administer/event-notifications.md                 # new
+    - Platform API:
+        - Overview and Authentication: cloud/platform-api/overview.md                  # new
+        - Events Reference: cloud/platform-api/events-reference.md                     # new
+        - API Reference: cloud/platform-api/api-reference.md                           # new
+
 markdown_extensions:
   - markdown.extensions.admonition
   - markdown.extensions.def_list
@@ -394,91 +187,32 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/wso2
-  # Sections whose subtopic list is versioned. Each top-level nav section listed
-  # here is rendered with a version selector; its direct children must be the
-  # version groups (titled with the version string). See nav-item.html / theme.js.
+  # No versioned sections: the cloud is unversioned.
   versioned_sections: {}
+  # Slug "cloud" makes the hooks write cloud/product-nav-manifest.json, so
+  # other deployments can render this section in their sidebars. Bijira
+  # also uses this slug today; it has to move to cloud/bijira before this
+  # build is routed at /cloud, or root-index.json can only point at one.
   unversioned_sections:
     Cloud:
       slug: cloud
-  # Choreo Connect gateway version referenced by {{ choreo_connect.* }}
-  # placeholders in the API Manager 4.2.0 docs.
-  choreo_connect:
-    version: 1.2.0
-    envoy_version: v1.24.1
-    helm_chart:
-      version: 1.2.0-1
-      git_tag: v1.2.0.1
-  # Top-level nav sections that only apply to a given doc version. They are
-  # rendered hidden; theme.js reveals them while the current URL contains the
-  # version as a path segment (e.g. /next/ai-workspace/... or
-  # /api-gateway/next/...). See partials/nav-item.html and theme.js.
-  version_scoped_navs:
-    - title: Developer Portal
-      version: "next"
-    - title: AI Workspace
-      version: "next"
   expanded_navs:
     - title: Cloud
       options:
         - verticle-line
-    - title: MCP Servers
+    - title: Develop APIs
       options:
         - verticle-line-only
-    - title: Monitor and Insights
-      options:
-        - verticle-line-only
-    - title: API Monetization
+    - title: Deploy
       options:
         - verticle-line-only
     - title: Administer
       options:
         - verticle-line-only
-    - title: Workflows
+    - title: Platform API
       options:
         - verticle-line-only
-    - title: Developer Portal
-      options:
-        - verticle-line
-    # Root-level (version-scoped) copy only; 'level: 1' keeps the AI Workspace
-    # section nested under Cloud rendering as a regular collapsed item.
-    - title: AI Workspace
-      level: 1
-      options:
-        - verticle-line
-    - title: API Manager
-      options:
-        - verticle-line
-    - title: API Gateway
-      options:
-        - verticle-line
-    - title: AI Gateway
-      options:
-        - verticle-line
-    - title: Analytics
-      options:
-        - verticle-line
-    - title: Monetization
-      level: 1
-      options:
-        - verticle-line
-    - title: Policy Hub
-      options:
-        - verticle-line
-    - title: Guides
-      options:
-        - verticle-line
-    - title: Samples
-      options:
-        - verticle-line
-        - divider
-    - title: Tools
-      options:
-        - verticle-line
   nav_icons:
-    Home:
-      icon: octicons/home-16
-      level: 1
     Overview:
       icon: octicons/apps-16
       level: 1
@@ -488,75 +222,33 @@ extra:
     Cloud:
       icon: octicons/cloud-16
       level: 1
-    Guides:
-      icon: octicons/repo-16
-      level: 1
-    Samples:
-      icon: octicons/beaker-16
-      level: 1
-    Tools:
-      icon: octicons/terminal-16
-      level: 1
     Introduction:
       icon: octicons/info-16
       level: 1
-    API Platform Samples:
-      icon: octicons/file-code-16
+    Getting Started:
+      icon: octicons/play-16
       level: 1
-    Tutorials:
-      icon: octicons/mortar-board-16
-      level: 1
-    Create API Proxy:
-      icon: octicons/pencil-16
-      level: 1
-    Develop API Proxy: 
+    Develop APIs:
       icon: octicons/tools-16
       level: 1
-    Test API Proxy:
-      icon: octicons/bug-16
+    Secure APIs:
+      icon: octicons/shield-lock-16
       level: 1
-    MCP Servers:
-      icon: octicons/server-16
+    Deploy:
+      icon: octicons/git-branch-16
       level: 1
-    AI Gateway:
-      icon: material/creation
+    Publish and Consume:
+      icon: octicons/book-16
       level: 1
-    AI Workspace:
-      icon: octicons/project-roadmap-16
+    Govern:
+      icon: octicons/law-16
       level: 1
-    Event Gateway:
-      icon: octicons/webhook-16
-      level: 1
-    API Gateway:
-      icon: octicons/globe-16
-      level: 1
-    Monitor and Insights:
+    Monitor:
       icon: octicons/graph-16
-      level: 1
-    API Monetization:
-      icon: octicons/credit-card-16
       level: 1
     Administer:
       icon: octicons/lock-16
       level: 1
-    Workflows:
-      icon: octicons/workflow-16
+    Platform API:
+      icon: octicons/code-16
       level: 1
-    Developer Portal:
-      icon: octicons/book-16
-      level: 1
-    Analytics & Monetization:
-        icon: octicons/graph-16
-        level: 1
-    API Manager:
-        icon: octicons/sliders-16
-    Analytics:
-        icon: octicons/graph-16
-    Monetization:
-        icon: octicons/credit-card-16
-        level: 1
-    Policy Hub:
-        icon: octicons/package-16
-
-#site_version: 1.0.0
-# base_path: http://localhost:8000
