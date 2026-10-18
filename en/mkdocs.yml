@@ -172,7 +172,6 @@ plugins:
   - redirects:
       redirect_maps: {}  # Do not add redirects here. Add them to redirects.yml instead.
 extra_css:
-  - assets/css/extra.css
   - assets/lib/highlightjs/default.min.css
   - assets/css/theme.css
   - assets/css/api-manager-legacy.css
