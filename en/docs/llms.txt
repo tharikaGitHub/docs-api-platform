@@ -4,53 +4,53 @@
 
 ## Introduction
 
-- [What is API Platform Cloud?](https://wso2.com/api-platform/docs/cloud.md): Learn what API Platform Cloud is and how it helps you manage, secure, and govern APIs and AI services as a WSO2-managed service.
-- [Key concepts](https://wso2.com/api-platform/docs/cloud/introduction/key-concepts.md): Learn the core API Platform Cloud concepts, including organizations, projects, environments, and gateways.
+- [What is API Platform Cloud?](https://wso2.com/api-platform/docs/api-platform-cloud.md): Learn what API Platform Cloud is and how it helps you manage, secure, and govern APIs and AI services as a WSO2-managed service.
+- [Key concepts](https://wso2.com/api-platform/docs/api-platform-cloud/introduction/key-concepts.md): Learn the core API Platform Cloud concepts, including organizations, projects, environments, and gateways.
 
 ## Getting Started
 
-- [Sign up and activate your subscription](https://wso2.com/api-platform/docs/cloud/getting-started/sign-up.md): Create an API Platform Cloud account and activate your subscription so you can start managing APIs.
-- [Sign in and organizations](https://wso2.com/api-platform/docs/cloud/getting-started/sign-in-and-organizations.md): Sign in to API Platform Cloud, create or switch organizations, and configure enterprise login.
-- [Tour of the Management Portal](https://wso2.com/api-platform/docs/cloud/getting-started/management-portal-tour.md): Find your way around the API Platform Cloud Management Portal and the main tasks you perform in it.
-- [Quick start guide](https://wso2.com/api-platform/docs/cloud/getting-started/quick-start-guide.md): Create, deploy, and invoke your first API on API Platform Cloud.
+- [Sign up and activate your subscription](https://wso2.com/api-platform/docs/api-platform-cloud/getting-started/sign-up.md): Create an API Platform Cloud account and activate your subscription so you can start managing APIs.
+- [Sign in and organizations](https://wso2.com/api-platform/docs/api-platform-cloud/getting-started/sign-in-and-organizations.md): Sign in to API Platform Cloud, create or switch organizations, and configure enterprise login.
+- [Tour of the Management Portal](https://wso2.com/api-platform/docs/api-platform-cloud/getting-started/management-portal-tour.md): Find your way around the API Platform Cloud Management Portal and the main tasks you perform in it.
+- [Quick start guide](https://wso2.com/api-platform/docs/api-platform-cloud/getting-started/quick-start-guide.md): Create, deploy, and invoke your first API on API Platform Cloud.
 
 ## Develop APIs
 
-- [Create an API](https://wso2.com/api-platform/docs/cloud/develop-apis/create-an-api.md): Create an API in API Platform Cloud using the API types and creation methods the platform supports.
-- [Apply policies](https://wso2.com/api-platform/docs/cloud/develop-apis/policies/apply-policies.md): Attach policies to an API in API Platform Cloud to control how the gateway handles requests and responses.
-- [Configure policy system parameters](https://wso2.com/api-platform/docs/cloud/develop-apis/policies/configure-system-parameters.md): Configure the system parameters that policies use in API Platform Cloud.
-- [Custom policies](https://wso2.com/api-platform/docs/cloud/develop-apis/policies/custom-policies.md): Add your own custom policies to APIs in API Platform Cloud.
-- [Build a custom policy with Go](https://wso2.com/api-platform/docs/cloud/develop-apis/policies/build-a-custom-policy-with-go.md): Write a custom gateway policy in Go and use it with your APIs in API Platform Cloud.
+- [Create an API](https://wso2.com/api-platform/docs/api-platform-cloud/develop-apis/create-an-api.md): Create an API in API Platform Cloud using the API types and creation methods the platform supports.
+- [Apply policies](https://wso2.com/api-platform/docs/api-platform-cloud/develop-apis/policies/apply-policies.md): Attach policies to an API in API Platform Cloud to control how the gateway handles requests and responses.
+- [Configure policy system parameters](https://wso2.com/api-platform/docs/api-platform-cloud/develop-apis/policies/configure-system-parameters.md): Configure the system parameters that policies use in API Platform Cloud.
+- [Custom policies](https://wso2.com/api-platform/docs/api-platform-cloud/develop-apis/policies/custom-policies.md): Add your own custom policies to APIs in API Platform Cloud.
+- [Build a custom policy with Go](https://wso2.com/api-platform/docs/api-platform-cloud/develop-apis/policies/build-a-custom-policy-with-go.md): Write a custom gateway policy in Go and use it with your APIs in API Platform Cloud.
 
 ## Secure APIs
 
-- [Secure APIs with OAuth 2.0](https://wso2.com/api-platform/docs/cloud/secure-apis/secure-apis-with-oauth2.md): Protect your APIs in API Platform Cloud with OAuth 2.0 access tokens.
-- [Manage secrets](https://wso2.com/api-platform/docs/cloud/secure-apis/manage-secrets.md): Store and use secrets such as backend credentials and API keys in API Platform Cloud.
+- [Secure APIs with OAuth 2.0](https://wso2.com/api-platform/docs/api-platform-cloud/secure-apis/secure-apis-with-oauth2.md): Protect your APIs in API Platform Cloud with OAuth 2.0 access tokens.
+- [Manage secrets](https://wso2.com/api-platform/docs/api-platform-cloud/secure-apis/manage-secrets.md): Store and use secrets such as backend credentials and API keys in API Platform Cloud.
 
 ## Deploy
 
-- [Environments](https://wso2.com/api-platform/docs/cloud/deploy/environments.md): Learn how environments work in API Platform Cloud and how to manage them.
-- [Promote APIs between environments](https://wso2.com/api-platform/docs/cloud/deploy/promote-apis-between-environments.md): Promote an API from one environment to the next in API Platform Cloud.
-- [Internal and external gateways](https://wso2.com/api-platform/docs/cloud/deploy/gateways/internal-and-external-gateways.md): Learn the difference between internal and external gateways in API Platform Cloud and when to use each one.
-- [Custom gateway domains](https://wso2.com/api-platform/docs/cloud/deploy/gateways/custom-gateway-domains.md): Configure a custom domain for a gateway in API Platform Cloud.
+- [Environments](https://wso2.com/api-platform/docs/api-platform-cloud/deploy/environments.md): Learn how environments work in API Platform Cloud and how to manage them.
+- [Promote APIs between environments](https://wso2.com/api-platform/docs/api-platform-cloud/deploy/promote-apis-between-environments.md): Promote an API from one environment to the next in API Platform Cloud.
+- [Internal and external gateways](https://wso2.com/api-platform/docs/api-platform-cloud/deploy/gateways/internal-and-external-gateways.md): Learn the difference between internal and external gateways in API Platform Cloud and when to use each one.
+- [Custom gateway domains](https://wso2.com/api-platform/docs/api-platform-cloud/deploy/gateways/custom-gateway-domains.md): Configure a custom domain for a gateway in API Platform Cloud.
 
 ## Publish and Consume
 
-- [Publish APIs to the Developer Portal](https://wso2.com/api-platform/docs/cloud/publish-and-consume/publish-apis-to-the-developer-portal.md): Publish your APIs from API Platform Cloud to the Developer Portal so that consumers can discover and use them.
-- [Developer Portal](https://wso2.com/api-platform/docs/cloud/publish-and-consume/developer-portal.md): Learn how API consumers use the Developer Portal to discover, subscribe to, and try your APIs.
-- [AI Workspace](https://wso2.com/api-platform/docs/cloud/publish-and-consume/ai-workspace.md): Learn how AI Workspace works with API Platform Cloud.
+- [Publish APIs to the Developer Portal](https://wso2.com/api-platform/docs/api-platform-cloud/publish-and-consume/publish-apis-to-the-developer-portal.md): Publish your APIs from API Platform Cloud to the Developer Portal so that consumers can discover and use them.
+- [Developer Portal](https://wso2.com/api-platform/docs/api-platform-cloud/publish-and-consume/developer-portal.md): Learn how API consumers use the Developer Portal to discover, subscribe to, and try your APIs.
+- [AI Workspace](https://wso2.com/api-platform/docs/api-platform-cloud/publish-and-consume/ai-workspace.md): Learn how AI Workspace works with API Platform Cloud.
 
 ## Govern
 
-- [API governance](https://wso2.com/api-platform/docs/cloud/govern/api-governance.md): Apply governance rules to your APIs in API Platform Cloud and review compliance.
+- [API governance](https://wso2.com/api-platform/docs/api-platform-cloud/govern/api-governance.md): Apply governance rules to your APIs in API Platform Cloud and review compliance.
 
 ## Administer
 
-- [Users and roles](https://wso2.com/api-platform/docs/cloud/administer/users-and-roles.md): Invite users to your API Platform Cloud organization and control what they can do with roles.
-- [Event notifications](https://wso2.com/api-platform/docs/cloud/administer/event-notifications.md): Receive notifications when events occur in your API Platform Cloud organization.
+- [Users and roles](https://wso2.com/api-platform/docs/api-platform-cloud/administer/users-and-roles.md): Invite users to your API Platform Cloud organization and control what they can do with roles.
+- [Event notifications](https://wso2.com/api-platform/docs/api-platform-cloud/administer/event-notifications.md): Receive notifications when events occur in your API Platform Cloud organization.
 
 ## Platform API
 
-- [Platform API overview and authentication](https://wso2.com/api-platform/docs/cloud/platform-api/overview.md): Learn what the API Platform Cloud Platform API offers and how to authenticate your requests to it.
-- [Events reference](https://wso2.com/api-platform/docs/cloud/platform-api/events-reference.md): Reference for the events that API Platform Cloud emits through the Platform API.
-- [Platform API reference](https://wso2.com/api-platform/docs/cloud/platform-api/api-reference.md): Reference for the API Platform Cloud Platform API operations.
+- [Platform API overview and authentication](https://wso2.com/api-platform/docs/api-platform-cloud/platform-api/overview.md): Learn what the API Platform Cloud Platform API offers and how to authenticate your requests to it.
+- [Events reference](https://wso2.com/api-platform/docs/api-platform-cloud/platform-api/events-reference.md): Reference for the events that API Platform Cloud emits through the Platform API.
+- [Platform API reference](https://wso2.com/api-platform/docs/api-platform-cloud/platform-api/api-reference.md): Reference for the API Platform Cloud Platform API operations.

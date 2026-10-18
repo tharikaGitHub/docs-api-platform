@@ -86,49 +86,49 @@ nav:
   # these links from root-index.json's _platformCommonBase at runtime.
   - Overview: https://50dcbee2-0809-4bf1-801f-b820c18e9816.e1-us-east-azure.choreoapps.dev/
   - Get Started: https://50dcbee2-0809-4bf1-801f-b820c18e9816.e1-us-east-azure.choreoapps.dev/get-started/
-  - Cloud:
+  - API Platform Cloud:
     - Introduction:
-        - What is API Platform Cloud?: cloud/index.md                                  # from: introduction/what-is-bijira.md
-        - Key Concepts: cloud/introduction/key-concepts.md                             # from: bijira-concepts/organization.md, project.md, data-planes.md
+        - What is API Platform Cloud?: api-platform-cloud/index.md                                  # from: introduction/what-is-bijira.md
+        - Key Concepts: api-platform-cloud/introduction/key-concepts.md                             # from: bijira-concepts/organization.md, project.md, data-planes.md
     - Getting Started:
-        - Sign Up and Activate Your Subscription: cloud/getting-started/sign-up.md     # new
-        - Sign In and Organizations: cloud/getting-started/sign-in-and-organizations.md  # from: bijira-concepts/organization.md, administer/configure-enterprise-login/configure-enterprise-login.md
-        - Tour of the Management Portal: cloud/getting-started/management-portal-tour.md  # new
-        - Quick Start Guide: cloud/getting-started/quick-start-guide.md                # from: introduction/quick-start-guide.md
+        - Sign Up and Activate Your Subscription: api-platform-cloud/getting-started/sign-up.md     # new
+        - Sign In and Organizations: api-platform-cloud/getting-started/sign-in-and-organizations.md  # from: bijira-concepts/organization.md, administer/configure-enterprise-login/configure-enterprise-login.md
+        - Tour of the Management Portal: api-platform-cloud/getting-started/management-portal-tour.md  # new
+        - Quick Start Guide: api-platform-cloud/getting-started/quick-start-guide.md                # from: introduction/quick-start-guide.md
     - Develop APIs:
-        - Create an API: cloud/develop-apis/create-an-api.md                           # from: create-api-proxy/overview.md and create-api-proxy/my-apis/** (only the API types and methods supported at launch)
+        - Create an API: api-platform-cloud/develop-apis/create-an-api.md                           # from: create-api-proxy/overview.md and create-api-proxy/my-apis/** (only the API types and methods supported at launch)
         - Policies:
-            - Apply Policies: cloud/develop-apis/policies/apply-policies.md             # from: develop-api-proxy/policy/overview.md, policies.md, attach-and-manage-policies.md
-            - Configure Policy System Parameters: cloud/develop-apis/policies/configure-system-parameters.md  # new
-            - Custom Policies: cloud/develop-apis/policies/custom-policies.md           # from: api-platform-gateway/apply-custom-policies-to-apis.md
-            - Build a Custom Policy with Go: cloud/develop-apis/policies/build-a-custom-policy-with-go.md  # from: api-platform-gateway/writing-a-custom-policy.md, build-gateway-with-custom-policies.md (only if Go extensibility ships for cloud)
-        # pending: - Test an API: cloud/develop-apis/test-an-api.md                     # from: test-api-proxy/openapi-console.md, curl.md
+            - Apply Policies: api-platform-cloud/develop-apis/policies/apply-policies.md             # from: develop-api-proxy/policy/overview.md, policies.md, attach-and-manage-policies.md
+            - Configure Policy System Parameters: api-platform-cloud/develop-apis/policies/configure-system-parameters.md  # new
+            - Custom Policies: api-platform-cloud/develop-apis/policies/custom-policies.md           # from: api-platform-gateway/apply-custom-policies-to-apis.md
+            - Build a Custom Policy with Go: api-platform-cloud/develop-apis/policies/build-a-custom-policy-with-go.md  # from: api-platform-gateway/writing-a-custom-policy.md, build-gateway-with-custom-policies.md (only if Go extensibility ships for cloud)
+        # pending: - Test an API: api-platform-cloud/develop-apis/test-an-api.md                     # from: test-api-proxy/openapi-console.md, curl.md
     - Secure APIs:
-        - Secure APIs with OAuth 2.0: cloud/secure-apis/secure-apis-with-oauth2.md      # from: develop-api-proxy/authentication-and-authorization/secure-api-access-with-bijira-sts.md
-        - Manage Secrets: cloud/secure-apis/manage-secrets.md                          # new
+        - Secure APIs with OAuth 2.0: api-platform-cloud/secure-apis/secure-apis-with-oauth2.md      # from: develop-api-proxy/authentication-and-authorization/secure-api-access-with-bijira-sts.md
+        - Manage Secrets: api-platform-cloud/secure-apis/manage-secrets.md                          # new
     - Deploy:
-        - Environments: cloud/deploy/environments.md                                   # from: administer/manage-environments/manage-environments.md
-        - Promote APIs Between Environments: cloud/deploy/promote-apis-between-environments.md  # from: administer/manage-cd-pipelines/manage-cd-pipelines.md
+        - Environments: api-platform-cloud/deploy/environments.md                                   # from: administer/manage-environments/manage-environments.md
+        - Promote APIs Between Environments: api-platform-cloud/deploy/promote-apis-between-environments.md  # from: administer/manage-cd-pipelines/manage-cd-pipelines.md
         - Gateways:
-            - Internal and External Gateways: cloud/deploy/gateways/internal-and-external-gateways.md  # new (concept framing from bijira-concepts/data-planes.md)
-            - Custom Gateway Domains: cloud/deploy/gateways/custom-gateway-domains.md   # from: administer/settings/configure-a-custom-domain-for-your-organization.md (Bijira is per organization; this is per gateway)
+            - Internal and External Gateways: api-platform-cloud/deploy/gateways/internal-and-external-gateways.md  # new (concept framing from bijira-concepts/data-planes.md)
+            - Custom Gateway Domains: api-platform-cloud/deploy/gateways/custom-gateway-domains.md   # from: administer/settings/configure-a-custom-domain-for-your-organization.md (Bijira is per organization; this is per gateway)
     - Publish and Consume:
-        - Publish APIs to the Developer Portal: cloud/publish-and-consume/publish-apis-to-the-developer-portal.md  # from: develop-api-proxy/lifecycle-management.md, api-platform-gateway/publish-apis/*.md
-        # pending: - Subscription Plans: cloud/publish-and-consume/subscription-plans.md  # from: develop-api-proxy/subscription-plans.md, administer/settings/create-api-subscription-plans.md
-        - Developer Portal: cloud/publish-and-consume/developer-portal.md              # from: devportal/** (keep short; link to the API Portal component docs)
-        - AI Workspace: cloud/publish-and-consume/ai-workspace.md                      # from: ai-workspace/overview.md (keep short; link to the AI Workspace component docs)
+        - Publish APIs to the Developer Portal: api-platform-cloud/publish-and-consume/publish-apis-to-the-developer-portal.md  # from: develop-api-proxy/lifecycle-management.md, api-platform-gateway/publish-apis/*.md
+        # pending: - Subscription Plans: api-platform-cloud/publish-and-consume/subscription-plans.md  # from: develop-api-proxy/subscription-plans.md, administer/settings/create-api-subscription-plans.md
+        - Developer Portal: api-platform-cloud/publish-and-consume/developer-portal.md              # from: devportal/** (keep short; link to the API Portal component docs)
+        - AI Workspace: api-platform-cloud/publish-and-consume/ai-workspace.md                      # from: ai-workspace/overview.md (keep short; link to the AI Workspace component docs)
     - Govern:
-        - API Governance: cloud/govern/api-governance.md                               # from: governance/overview.md, governance/govern-api-proxy.md
+        - API Governance: api-platform-cloud/govern/api-governance.md                               # from: governance/overview.md, governance/govern-api-proxy.md
     # pending: - Monitor:
-    # pending:     - Logs: cloud/monitor/logs.md                                         # from: monitoring-and-insights/logs/*.md
-    # pending:     - Status Page: cloud/monitor/status-page.md                           # from: monitoring-and-insights/status-page.md
+    # pending:     - Logs: api-platform-cloud/monitor/logs.md                                         # from: monitoring-and-insights/logs/*.md
+    # pending:     - Status Page: api-platform-cloud/monitor/status-page.md                           # from: monitoring-and-insights/status-page.md
     - Administer:
-        - Users and Roles: cloud/administer/users-and-roles.md                         # new
-        - Event Notifications: cloud/administer/event-notifications.md                 # new
+        - Users and Roles: api-platform-cloud/administer/users-and-roles.md                         # new
+        - Event Notifications: api-platform-cloud/administer/event-notifications.md                 # new
     - Platform API:
-        - Overview and Authentication: cloud/platform-api/overview.md                  # new
-        - Events Reference: cloud/platform-api/events-reference.md                     # new
-        - API Reference: cloud/platform-api/api-reference.md                           # new
+        - Overview and Authentication: api-platform-cloud/platform-api/overview.md                  # new
+        - Events Reference: api-platform-cloud/platform-api/events-reference.md                     # new
+        - API Reference: api-platform-cloud/platform-api/api-reference.md                           # new
 
 markdown_extensions:
   - markdown.extensions.admonition
@@ -188,15 +188,16 @@ extra:
       link: https://github.com/wso2
   # No versioned sections: the cloud is unversioned.
   versioned_sections: {}
-  # Slug "cloud" makes the hooks write cloud/product-nav-manifest.json, so
-  # other deployments can render this section in their sidebars. Bijira
-  # also uses this slug today; it has to move to cloud/bijira before this
-  # build is routed at /cloud, or root-index.json can only point at one.
+  # Slug "api-platform-cloud" makes the hooks write
+  # api-platform-cloud/product-nav-manifest.json, so other deployments can
+  # render this section in their sidebars. It is separate from Bijira's
+  # "cloud" slug so both can run side by side for now; Bijira keeps /cloud/
+  # and its existing links until the move to /cloud/ and its redirects.
   unversioned_sections:
-    Cloud:
-      slug: cloud
+    API Platform Cloud:
+      slug: api-platform-cloud
   expanded_navs:
-    - title: Cloud
+    - title: API Platform Cloud
       options:
         - verticle-line
     - title: Develop APIs
@@ -218,7 +219,7 @@ extra:
     Get Started:
       icon: octicons/rocket-16
       level: 1
-    Cloud:
+    API Platform Cloud:
       icon: octicons/cloud-16
       level: 1
     Introduction:
