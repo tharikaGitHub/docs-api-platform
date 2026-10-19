@@ -33,7 +33,7 @@ copyright: ©2026 WSO2 LLC.
 # Configuration
 watch:
   - theme/
-  - docs/assets/
+  - docs/api-platform-cloud/assets/
 
 theme:
   name: material
@@ -172,13 +172,13 @@ plugins:
   - redirects:
       redirect_maps: {}  # Do not add redirects here. Add them to redirects.yml instead.
 extra_css:
-  - assets/lib/highlightjs/default.min.css
+  - api-platform-cloud/assets/lib/highlightjs/default.min.css
   - assets/css/theme.css
-  - assets/css/api-manager-legacy.css
-  - assets/lib/json-formatter/json-formatter.css
+  - api-platform-cloud/assets/css/api-manager-legacy.css
+  - api-platform-cloud/assets/lib/json-formatter/json-formatter.css
 extra_javascript:
-  - assets/lib/json-formatter/json-formatter.umd.js
-  - assets/lib/highlightjs/highlight.min.js
+  - api-platform-cloud/assets/lib/json-formatter/json-formatter.umd.js
+  - api-platform-cloud/assets/lib/highlightjs/highlight.min.js
   - https://8c140a8d-7209-401b-84ab-2aebe8deaa80.e1-us-east-azure.choreoapps.dev/theme.js
 extra:
   show_repo_in_nav: false
