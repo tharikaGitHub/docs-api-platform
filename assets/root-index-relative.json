@@ -5,11 +5,6 @@
       "title": "API Platform Cloud",
       "manifestUrl": "https://wso2.com/api-platform/docs-staging/api-platform-cloud/product-nav-manifest.json"
     },
-    "cloud": {
-      "slug": "cloud",
-      "title": "Cloud",
-      "manifestUrl": "https://wso2.com/api-platform/docs-staging/cloud/product-nav-manifest.json"
-    },
     "api-manager": {
       "slug": "api-manager",
       "title": "API Manager",
@@ -64,6 +59,12 @@
       "slug": "tools",
       "title": "Tools",
       "manifestUrl": "https://wso2.com/api-platform/docs-staging/tools/product-nav-manifest.json"
+    },
+    "cloud": {
+      "slug": "cloud",
+      "title": "Bijira",
+      "manifestUrl": "https://wso2.com/api-platform/docs-staging/cloud/product-nav-manifest.json",
+      "badge": "Deprecated"
     }
   },
   "_modes": {

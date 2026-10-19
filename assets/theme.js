@@ -793,6 +793,50 @@ onEachPage(function () {
     });
   }
 
+  // root-index.json can rename a product's sidebar section (title) and add a
+  // short label after its name (badge), e.g. Bijira's "Deprecated". Applied
+  // to this page's own server-rendered section as well as to sections drawn
+  // from other products' manifests, so a product reads the same everywhere
+  // without rebuilding it.
+  function replaceTitleText(el, title) {
+    for (var i = 0; i < el.childNodes.length; i++) {
+      var node = el.childNodes[i];
+      if (node.nodeType === 3 && node.textContent.trim()) {
+        var parts = node.textContent.match(/^(\s*)[\s\S]*?(\s*)$/);
+        node.textContent = parts[1] + title + parts[2];
+        return;
+      }
+    }
+  }
+
+  function decorateSection(li, product) {
+    if (!product) return;
+    var titleSpan = li.querySelector(':scope > label.md-nav__link > span') ||
+      li.querySelector(':scope > .md-nav__versioned-header .md-nav__versioned-title > span');
+    if (!titleSpan) return;
+    if (product.title) {
+      replaceTitleText(titleSpan, product.title);
+      var drawerTitle = li.querySelector(':scope > nav > label.md-nav__title');
+      if (drawerTitle) replaceTitleText(drawerTitle, product.title);
+    }
+    if (product.badge && !titleSpan.querySelector('.md-nav__badge')) {
+      if (!document.getElementById('md-nav-badge-style')) {
+        var style = document.createElement('style');
+        style.id = 'md-nav-badge-style';
+        style.textContent =
+          '.md-nav__badge{display:inline-block;margin-left:.4rem;padding:0 .4rem;' +
+          'border:1px solid var(--md-default-fg-color--lighter);border-radius:.6rem;' +
+          'color:var(--md-default-fg-color--light);font-size:.55rem;font-weight:400;' +
+          'line-height:1.5;vertical-align:middle;white-space:nowrap}';
+        document.head.appendChild(style);
+      }
+      var badge = document.createElement('span');
+      badge.className = 'md-nav__badge';
+      badge.textContent = product.badge;
+      titleSpan.appendChild(badge);
+    }
+  }
+
   // The toggle lives in the header (which instant loading keeps across
   // pages) and, for narrow screens where the header has no room, at the top
   // of the sidebar drawer. Both are rebuilt on every page so their click
@@ -1123,6 +1167,7 @@ onEachPage(function () {
     });
 
     insertProductSection(li, slug, order, style.hr);
+    decorateSection(li, product);
     renderVersionGroup(initialVersion);
     fitSelectToValue(select);
   }
@@ -1142,6 +1187,7 @@ onEachPage(function () {
     var style = sectionStyle(manifest);
     if (style.classes) li.className += style.classes;
     insertProductSection(li, slug, order, style.hr);
+    decorateSection(li, product);
   }
 
   fetch(new URL(SHARED_BASE + 'root-index.json', scope)).then(function (r) { return r.ok ? r.json() : {}; })
@@ -1153,6 +1199,14 @@ onEachPage(function () {
       var currentSlug = currentSlugFromLocation(LIVE_SITE_BASE);
 
       var products = index.products || {};
+
+      // This page's own sections, rendered server-side under their build-time
+      // names; give them the root index's name and badge too.
+      Array.prototype.forEach.call(primaryList.children, function (item) {
+        var slug = item.getAttribute('data-md-versioned-section') || item.getAttribute('data-md-xproduct');
+        if (slug) decorateSection(item, products[slug]);
+      });
+
       var modes = index._modes && index._modes.options ? index._modes : null;
       var activeMode = modes ? resolveMode(modes, currentSlug) : null;
       var modeProducts = activeMode ? (modes.options[activeMode].products || []) : null;

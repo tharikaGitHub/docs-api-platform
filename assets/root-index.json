@@ -5,11 +5,6 @@
       "title": "API Platform Cloud",
       "manifestUrl": "https://wso2.com/api-platform/docs-staging/api-platform-cloud/product-nav-manifest.json"
     },
-    "cloud": {
-      "slug": "cloud",
-      "title": "Cloud",
-      "manifestUrl": "https://9782180b-c65f-48d6-bef4-f5bdcdbb0245.e1-us-east-azure.choreoapps.dev/cloud/product-nav-manifest.json"
-    },
     "api-manager": {
       "slug": "api-manager",
       "title": "API Manager",
@@ -64,6 +59,12 @@
       "slug": "tools",
       "title": "Tools",
       "manifestUrl": "https://50dcbee2-0809-4bf1-801f-b820c18e9816.e1-us-east-azure.choreoapps.dev/tools/product-nav-manifest.json"
+    },
+    "cloud": {
+      "slug": "cloud",
+      "title": "Bijira",
+      "manifestUrl": "https://9782180b-c65f-48d6-bef4-f5bdcdbb0245.e1-us-east-azure.choreoapps.dev/cloud/product-nav-manifest.json",
+      "badge": "Deprecated"
     }
   },
   "_modes": {
