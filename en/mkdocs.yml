@@ -76,6 +76,11 @@ strict: false
 nav:
   - Overview: index.md
   - Get Started: get-started.md
+  # Landing page of the Self-managed mode. In the nav only so the page gets a
+  # breadcrumb; hidden from the sidebar (extra.hide_navs). Readers reach it
+  # through Overview while the Self-managed toggle is selected.
+  - Self-managed:
+    - Overview: self-managed/index.md
   - Analytics:
     - Overview: analytics/overview.md
   - Monetization:
@@ -223,6 +228,10 @@ extra:
       slug: guides
     Tools:
       slug: tools
+  # Nav sections kept out of the sidebar. See partials/nav-item.html.
+  hide_navs:
+    Self-managed:
+      level: 1
   # Choreo Connect gateway version referenced by {{ choreo_connect.* }}
   # placeholders in the API Manager 4.2.0 docs.
   choreo_connect:
