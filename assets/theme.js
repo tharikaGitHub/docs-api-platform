@@ -905,6 +905,60 @@ onEachPage(function () {
     });
   }
 
+  // A mode can put some products' sections under a heading that doesn't
+  // collapse (_modes.options.<mode>.groups), e.g. Cloud's "Hybrid gateways"
+  // over API Gateway and AI Gateway. The sections stay top-level items, so
+  // ordering is unchanged; the heading goes right before the group's first
+  // section, with one divider above it instead of one per section. Run again
+  // whenever a section is added, since sections arrive in any order.
+  function placeGroupHeadings(groups) {
+    (groups || []).forEach(function (group, i) {
+      var members = Array.prototype.filter.call(primaryList.children, function (item) {
+        var slug = item.getAttribute('data-md-versioned-section') || item.getAttribute('data-md-xproduct');
+        return slug && group.products.indexOf(slug) !== -1;
+      });
+      if (!members.length) return;
+
+      members.forEach(function (item) {
+        item.classList.add('md-nav__item--grouped');
+        var prev = item.previousElementSibling;
+        if (prev && prev.tagName === 'HR' && !prev.hasAttribute('data-md-group-divider')) prev.style.display = 'none';
+      });
+
+      var id = 'md-nav-group-' + i;
+      var heading = document.getElementById(id);
+      var divider = heading && heading.previousElementSibling;
+      if (!heading) {
+        if (!document.getElementById('md-nav-group-style')) {
+          var style = document.createElement('style');
+          style.id = 'md-nav-group-style';
+          style.textContent =
+            '.md-nav__group-heading{padding:.3rem .6rem .1rem .6rem;font-size:.64rem;font-weight:700;' +
+            'color:var(--md-default-fg-color--light);cursor:default}' +
+            '.md-nav__item--grouped{margin-left:.6rem}';
+          document.head.appendChild(style);
+        }
+        divider = document.createElement('hr');
+        divider.className = 'md-nav--expanded-section-divider';
+        divider.setAttribute('data-md-group-divider', '');
+        heading = document.createElement('li');
+        heading.id = id;
+        heading.className = 'md-nav__item md-nav__group-heading';
+        heading.setAttribute('role', 'presentation');
+        heading.textContent = group.title;
+      }
+
+      // Before the first member, and before that member's own (hidden) divider.
+      var anchor = members[0];
+      var prev = anchor.previousElementSibling;
+      if (prev && prev.tagName === 'HR' && prev !== divider) anchor = prev;
+      if (heading.nextElementSibling !== anchor) {
+        primaryList.insertBefore(divider, anchor);
+        primaryList.insertBefore(heading, anchor);
+      }
+    });
+  }
+
   // The toggle lives in the header (which instant loading keeps across
   // pages) and, for narrow screens where the header has no room, at the top
   // of the sidebar drawer. Both are rebuilt on every page so their click
@@ -1236,6 +1290,7 @@ onEachPage(function () {
 
     insertProductSection(li, slug, order, style.hr);
     decorateSection(li, product);
+    placeGroupHeadings(groups);
     renderVersionGroup(initialVersion);
     fitSelectToValue(select);
   }
@@ -1257,10 +1312,13 @@ onEachPage(function () {
     insertProductSection(li, slug, order, style.hr);
     decorateSection(li, product);
     if (flatten && flatten.product === slug) flattenSection(li, flatten);
+    placeGroupHeadings(groups);
   }
 
-  // The active mode's flatten setting, if any (see flattenSection).
+  // The active mode's flatten and groups settings, if any (see flattenSection
+  // and placeGroupHeadings).
   var flatten = null;
+  var groups = null;
 
   fetch(new URL(SHARED_BASE + 'root-index.json', scope)).then(function (r) { return r.ok ? r.json() : {}; })
     .then(function (index) {
@@ -1329,6 +1387,8 @@ onEachPage(function () {
 
       if (activeMode) {
         hideSectionsOutsideMode(modeProducts);
+        groups = modes.options[activeMode].groups || null;
+        placeGroupHeadings(groups);
         renderModeToggle(modes, activeMode, function (next) {
           if (next === activeMode) return;
           storeMode(next);

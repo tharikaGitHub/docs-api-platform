@@ -94,7 +94,16 @@
             "Overview": "Introduction",
             "Get Started": "Getting Started"
           }
-        }
+        },
+        "groups": [
+          {
+            "title": "Hybrid gateways",
+            "products": [
+              "api-gateway",
+              "ai-gateway"
+            ]
+          }
+        ]
       },
       "self-managed": {
         "title": "Self-managed",
