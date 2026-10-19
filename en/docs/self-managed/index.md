@@ -1,5 +1,5 @@
 ---
-title: "Self-managed"
+title: "API Platform"
 description: "Run WSO2 API Platform components on your own infrastructure: API Manager, API Gateway, AI Gateway, API Portal, and AI Workspace, alone or together."
 canonical_url: https://wso2.com/api-platform/docs/self-managed/
 md_url: https://wso2.com/api-platform/docs/self-managed.md
@@ -11,7 +11,7 @@ last_updated: 2026-10-19
 content_type: "concept"
 ---
 
-# Self-managed
+# API Platform
 
 In a self-managed deployment, you download WSO2 API Platform components and run them on your own infrastructure. You control where the software runs and where your data resides.
 
