@@ -905,6 +905,31 @@ onEachPage(function () {
     });
   }
 
+  // A group can also list, per product, the only versions its dropdown offers
+  // (groups[].versions), e.g. the API Gateway and AI Gateway versions API
+  // Platform Cloud supports in hybrid mode. The version a section is showing
+  // stays in its dropdown even when unsupported, so the dropdown never
+  // misreports which version the reader is looking at.
+  function groupVersionsFor(slug) {
+    for (var i = 0; groups && i < groups.length; i++) {
+      var versions = groups[i].versions && groups[i].versions[slug];
+      if (versions && groups[i].products.indexOf(slug) !== -1) return versions;
+    }
+    return null;
+  }
+
+  function limitVersionOptions(li, supported) {
+    var select = li.querySelector('select.md-nav__version-dropdown');
+    if (!select) return;
+    Array.prototype.slice.call(select.options).forEach(function (option) {
+      if (supported.indexOf(option.value) === -1 && !option.selected) option.remove();
+    });
+    Array.prototype.forEach.call(select.querySelectorAll('optgroup'), function (group) {
+      if (!group.children.length) group.remove();
+    });
+    fitSelectToValue(select);
+  }
+
   // A mode can put some products' sections under a heading that doesn't
   // collapse (_modes.options.<mode>.groups), e.g. Cloud's "Hybrid gateways"
   // over API Gateway and AI Gateway. The sections stay top-level items, so
@@ -921,6 +946,8 @@ onEachPage(function () {
 
       members.forEach(function (item) {
         item.classList.add('md-nav__item--grouped');
+        var slug = item.getAttribute('data-md-versioned-section') || item.getAttribute('data-md-xproduct');
+        if (group.versions && group.versions[slug]) limitVersionOptions(item, group.versions[slug]);
         var prev = item.previousElementSibling;
         if (prev && prev.tagName === 'HR' && !prev.hasAttribute('data-md-group-divider')) prev.style.display = 'none';
       });
@@ -1161,6 +1188,11 @@ onEachPage(function () {
       ? manifest.default
       : presentVersions[0];
     if (!initialVersion) return;
+    // Open on a version the active mode supports, if this manifest has one.
+    var supported = groupVersionsFor(slug);
+    if (supported && supported.indexOf(initialVersion) === -1) {
+      initialVersion = supported.filter(function (v) { return manifest.versions[v]; })[0] || initialVersion;
+    }
 
     var style = sectionStyle(manifest);
     var id = nextId();
