@@ -87,7 +87,14 @@
           "guides",
           "tools",
           "cloud"
-        ]
+        ],
+        "flatten": {
+          "product": "api-platform-cloud",
+          "topLinks": {
+            "Overview": "Introduction",
+            "Get Started": "Getting Started"
+          }
+        }
       },
       "self-managed": {
         "title": "Self-managed",

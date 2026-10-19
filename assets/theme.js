@@ -837,6 +837,74 @@ onEachPage(function () {
     }
   }
 
+  // A mode can show one product's sidebar sections at the top level instead
+  // of under that product's own collapsible section: Cloud does this for API
+  // Platform Cloud (_modes.options.<mode>.flatten). flatten.topLinks maps the
+  // top-level Overview / Get Started items to the product's own groups that
+  // replace them (renamed), so those two lead into the product's pages
+  // instead of repeating them. Moved sections keep the product's slug, so
+  // other products' sections still sort after them.
+  function itemTitle(li) {
+    var el = li.querySelector(':scope > label.md-nav__link, :scope > a.md-nav__link');
+    return el ? el.textContent.replace(/\s+/g, ' ').trim() : '';
+  }
+
+  function renameFirstText(el, title) {
+    if (!el) return;
+    var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    for (var node = walker.nextNode(); node; node = walker.nextNode()) {
+      if (!node.textContent.trim() || node.parentNode.closest('.md-nav__badge')) continue;
+      var parts = node.textContent.match(/^(\s*)[\s\S]*?(\s*)$/);
+      node.textContent = parts[1] + title + parts[2];
+      return;
+    }
+  }
+
+  function topLinkItem(title) {
+    for (var i = 0; i < primaryList.children.length; i++) {
+      var item = primaryList.children[i];
+      if (!item.getAttribute('data-md-xproduct') && !item.getAttribute('data-md-versioned-section') &&
+          item.querySelector(':scope > a.md-nav__link') && itemTitle(item) === title) {
+        return item;
+      }
+    }
+    return null;
+  }
+
+  function flattenSection(sectionLi, flatten) {
+    var list = sectionLi.querySelector(':scope > nav > ul.md-nav__list');
+    if (!list) return;
+    var slug = sectionLi.getAttribute('data-md-xproduct');
+    var topLinks = flatten.topLinks || {};
+    var divider = sectionLi.previousElementSibling;
+    if (divider && divider.tagName === 'HR') divider.remove();
+    Array.prototype.slice.call(list.children).forEach(function (child) {
+      child.setAttribute('data-md-xproduct', slug);
+      var groupTitle = itemTitle(child);
+      var topTitle = Object.keys(topLinks).filter(function (t) { return topLinks[t] === groupTitle; })[0];
+      var replaced = topTitle && topLinkItem(topTitle);
+      if (replaced) {
+        renameFirstText(child.querySelector(':scope > label.md-nav__link, :scope > a.md-nav__link'), topTitle);
+        renameFirstText(child.querySelector(':scope > nav > label.md-nav__title'), topTitle);
+        primaryList.replaceChild(child, replaced);
+      } else {
+        primaryList.insertBefore(child, sectionLi);
+      }
+    });
+    sectionLi.remove();
+  }
+
+  // On the flattened product's own pages, the server-rendered breadcrumb
+  // still names the groups by their original titles ("Introduction").
+  function renameBreadcrumbs(topLinks) {
+    var renames = {};
+    Object.keys(topLinks || {}).forEach(function (t) { renames[topLinks[t]] = t; });
+    Array.prototype.forEach.call(document.querySelectorAll('.md-path__link'), function (link) {
+      var title = link.textContent.trim();
+      if (Object.prototype.hasOwnProperty.call(renames, title)) renameFirstText(link, renames[title]);
+    });
+  }
+
   // The toggle lives in the header (which instant loading keeps across
   // pages) and, for narrow screens where the header has no room, at the top
   // of the sidebar drawer. Both are rebuilt on every page so their click
@@ -1188,7 +1256,11 @@ onEachPage(function () {
     if (style.classes) li.className += style.classes;
     insertProductSection(li, slug, order, style.hr);
     decorateSection(li, product);
+    if (flatten && flatten.product === slug) flattenSection(li, flatten);
   }
+
+  // The active mode's flatten setting, if any (see flattenSection).
+  var flatten = null;
 
   fetch(new URL(SHARED_BASE + 'root-index.json', scope)).then(function (r) { return r.ok ? r.json() : {}; })
     .then(function (index) {
@@ -1246,6 +1318,13 @@ onEachPage(function () {
             item.classList.add('md-nav__item--active');
           }
         });
+      }
+
+      flatten = activeMode ? (modes.options[activeMode].flatten || null) : null;
+      if (flatten) {
+        var ownSection = primaryList.querySelector(':scope > [data-md-xproduct="' + flatten.product + '"]');
+        if (ownSection) flattenSection(ownSection, flatten);
+        if (currentSlug === flatten.product) renameBreadcrumbs(flatten.topLinks);
       }
 
       if (activeMode) {
