@@ -740,6 +740,108 @@ onEachPage(function () {
   var idCounter = 0;
   function nextId() { return '__xproduct_' + idCounter++; }
 
+  // Deployment modes (Cloud / Self-managed)
+  // ---------------------------------------------------------------------
+  // root-index.json's optional _modes block lists, per mode, the products its
+  // sidebar shows (in sidebar order), the mode's landing page, and where its
+  // Overview / Get Started links go. Paths are relative to _liveSiteBase.
+  // Without _modes there is no toggle and every product shows, as before.
+  //
+  // A page whose product belongs to exactly one mode always shows that mode
+  // (an API Manager page is Self-managed), and that becomes the reader's
+  // choice. Pages shared by both modes (gateways, Policy Hub, ...) keep the
+  // reader's last choice, falling back to _modes.default.
+  var MODE_STORAGE_KEY = 'apiPlatformDocsMode';
+
+  function storedMode() {
+    try { return window.localStorage.getItem(MODE_STORAGE_KEY); } catch (e) { return null; }
+  }
+
+  function storeMode(name) {
+    try { window.localStorage.setItem(MODE_STORAGE_KEY, name); } catch (e) { /* private mode */ }
+  }
+
+  function resolveMode(modes, slug) {
+    var names = Object.keys(modes.options);
+    var owners = names.filter(function (name) {
+      var mode = modes.options[name];
+      var landingSlug = (mode.landing || '').split('/')[0];
+      return (mode.products || []).indexOf(slug) !== -1 || (slug && landingSlug === slug);
+    });
+    if (owners.length === 1) {
+      storeMode(owners[0]);
+      return owners[0];
+    }
+    var stored = storedMode();
+    if (stored && names.indexOf(stored) !== -1 && (!owners.length || owners.indexOf(stored) !== -1)) {
+      return stored;
+    }
+    if (owners.length) return owners[0];
+    return names.indexOf(modes.default) !== -1 ? modes.default : names[0];
+  }
+
+  // Hides this page's own server-rendered sections that the mode doesn't
+  // list, with the divider nav-item.html renders right before each one.
+  // Cross-product sections outside the mode are never fetched at all.
+  function hideSectionsOutsideMode(products) {
+    Array.prototype.forEach.call(primaryList.children, function (item) {
+      var slug = item.getAttribute('data-md-versioned-section') || item.getAttribute('data-md-xproduct');
+      if (!slug || products.indexOf(slug) !== -1) return;
+      item.style.display = 'none';
+      var prev = item.previousElementSibling;
+      if (prev && prev.tagName === 'HR') prev.style.display = 'none';
+    });
+  }
+
+  // The toggle lives in the header (which instant loading keeps across
+  // pages) and, for narrow screens where the header has no room, at the top
+  // of the sidebar drawer. Both are rebuilt on every page so their click
+  // handler sees the current page.
+  function renderModeToggle(modes, activeMode, onSwitch) {
+    if (!document.getElementById('md-mode-toggle-style')) {
+      var style = document.createElement('style');
+      style.id = 'md-mode-toggle-style';
+      style.textContent =
+        '.md-mode-toggle{display:inline-flex;flex-shrink:0;gap:.1rem;margin:0 .6rem;padding:.1rem;' +
+        'border:1px solid var(--md-default-fg-color--lighter);border-radius:.5rem}' +
+        '.md-mode-toggle button{padding:.35rem .7rem;border:1px solid transparent;border-radius:.4rem;' +
+        'background:none;color:inherit;font:inherit;font-size:.7rem;line-height:1;white-space:nowrap;cursor:pointer}' +
+        '.md-mode-toggle button[aria-pressed="true"]{border-color:var(--md-accent-fg-color);' +
+        'background:var(--md-accent-fg-color--transparent);font-weight:700}' +
+        '.md-mode-toggle button:focus-visible{outline:2px solid var(--md-accent-fg-color);outline-offset:1px}' +
+        '.md-mode-toggle--drawer{display:none}' +
+        '@media screen and (max-width:76.1875em){.md-header .md-mode-toggle{display:none}' +
+        '.md-mode-toggle--drawer{display:flex;margin:.6rem .8rem}}';
+      document.head.appendChild(style);
+    }
+
+    function build(id, extraClass) {
+      var old = document.getElementById(id);
+      if (old) old.remove();
+      var group = document.createElement('div');
+      group.id = id;
+      group.className = 'md-mode-toggle' + extraClass;
+      group.setAttribute('role', 'group');
+      group.setAttribute('aria-label', 'Deployment');
+      Object.keys(modes.options).forEach(function (name) {
+        var button = document.createElement('button');
+        button.type = 'button';
+        button.textContent = modes.options[name].title || name;
+        button.setAttribute('aria-pressed', String(name === activeMode));
+        button.addEventListener('click', function () { onSwitch(name); });
+        group.appendChild(button);
+      });
+      return group;
+    }
+
+    var headerTitle = document.querySelector('.md-header__inner .md-header__title');
+    if (headerTitle) {
+      headerTitle.parentNode.insertBefore(build('md-mode-toggle', ''), headerTitle.nextSibling);
+    }
+    var primaryNav = primaryList.parentNode;
+    primaryNav.insertBefore(build('md-mode-toggle-drawer', ' md-mode-toggle--drawer'), primaryList);
+  }
+
   // Resolve each node's page url into an absolute href up front, relative
   // to that product+version's own base, so renderNode itself doesn't need
   // to know about slugs/versions/scope.
@@ -1050,6 +1152,11 @@ onEachPage(function () {
       if (index._liveSiteBase) LIVE_SITE_BASE = index._liveSiteBase;
       var currentSlug = currentSlugFromLocation(LIVE_SITE_BASE);
 
+      var products = index.products || {};
+      var modes = index._modes && index._modes.options ? index._modes : null;
+      var activeMode = modes ? resolveMode(modes, currentSlug) : null;
+      var modeProducts = activeMode ? (modes.options[activeMode].products || []) : null;
+
       // Overview/Get Started are plain top-level links, baked into every
       // branch's own mkdocs.yml nav pointing at platform-common's URL at
       // build time - unlike a product section, they're not in
@@ -1057,24 +1164,61 @@ onEachPage(function () {
       // no data-md-xproduct/data-md-versioned-section to identify them by.
       // Matched by title text instead, among top-level items only, so a
       // platform-common redeploy only means updating _platformCommonBase
-      // here, not editing and rebuilding every product branch.
-      if (index._platformCommonBase) {
-        var platformCommonLinks = { 'Overview': '', 'Get Started': 'get-started/' };
+      // here, not editing and rebuilding every product branch. With modes,
+      // each mode names its own Overview / Get Started pages instead.
+      var topLinks = null;
+      if (activeMode && modes.options[activeMode].links) {
+        topLinks = {};
+        Object.keys(modes.options[activeMode].links).forEach(function (title) {
+          topLinks[title] = new URL(modes.options[activeMode].links[title], LIVE_SITE_BASE).href;
+        });
+      } else if (index._platformCommonBase) {
+        topLinks = {
+          'Overview': new URL(index._platformCommonBase, scope).href,
+          'Get Started': new URL(index._platformCommonBase + 'get-started/', scope).href
+        };
+      }
+      if (topLinks) {
         Array.prototype.forEach.call(primaryList.children, function (item) {
           var link = item.querySelector && item.querySelector(':scope > a.md-nav__link');
           if (!link) return;
           var title = link.textContent.trim();
-          if (Object.prototype.hasOwnProperty.call(platformCommonLinks, title)) {
-            link.href = new URL(index._platformCommonBase + platformCommonLinks[title], scope).href;
+          if (!Object.prototype.hasOwnProperty.call(topLinks, title)) return;
+          link.href = topLinks[title];
+          // Mark it current when this page is the one it now points to, e.g.
+          // the Self-managed landing page, which isn't in any build's nav.
+          if (new URL(link.href).pathname === location.pathname) {
+            link.classList.add('md-nav__link--active');
+            item.classList.add('md-nav__item--active');
           }
         });
       }
 
-      var products = index.products || {};
-      var order = Object.keys(products);
+      if (activeMode) {
+        hideSectionsOutsideMode(modeProducts);
+        renderModeToggle(modes, activeMode, function (next) {
+          if (next === activeMode) return;
+          storeMode(next);
+          // Stay on this page if it belongs to the new mode too; otherwise
+          // go to that mode's landing page.
+          var target = modes.options[next];
+          if (currentSlug && (target.products || []).indexOf(currentSlug) !== -1) {
+            window.location.reload();
+          } else {
+            window.location.href = new URL(target.landing || '', LIVE_SITE_BASE).href;
+          }
+        });
+      }
+
+      // The active mode's own order first; the rest only matter without modes.
+      var order = modeProducts
+        ? modeProducts.concat(Object.keys(products).filter(function (s) { return modeProducts.indexOf(s) === -1; }))
+        : Object.keys(products);
       order.forEach(function (slug) {
         if (slug === currentSlug) return;
+        if (modeProducts && modeProducts.indexOf(slug) === -1) return;
         var product = products[slug];
+        if (!product) return;
         fetch(new URL(product.manifestUrl, scope))
           .then(function (r) { return r.ok ? r.json() : null; })
           .then(function (manifest) {

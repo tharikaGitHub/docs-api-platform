@@ -66,6 +66,50 @@
       "manifestUrl": "https://50dcbee2-0809-4bf1-801f-b820c18e9816.e1-us-east-azure.choreoapps.dev/tools/product-nav-manifest.json"
     }
   },
+  "_modes": {
+    "default": "cloud",
+    "options": {
+      "cloud": {
+        "title": "Cloud",
+        "landing": "api-platform-cloud/",
+        "links": {
+          "Overview": "api-platform-cloud/",
+          "Get Started": "api-platform-cloud/getting-started/quick-start-guide/"
+        },
+        "products": [
+          "api-platform-cloud",
+          "api-gateway",
+          "ai-gateway",
+          "analytics",
+          "monetization",
+          "policy-hub",
+          "guides",
+          "tools",
+          "cloud"
+        ]
+      },
+      "self-managed": {
+        "title": "Self-managed",
+        "landing": "self-managed/",
+        "links": {
+          "Overview": "self-managed/",
+          "Get Started": "get-started/"
+        },
+        "products": [
+          "api-manager",
+          "api-gateway",
+          "ai-gateway",
+          "api-portal",
+          "ai-workspace",
+          "analytics",
+          "monetization",
+          "policy-hub",
+          "guides",
+          "tools"
+        ]
+      }
+    }
+  },
   "_liveSiteBase": "https://wso2.com/api-platform/docs-staging/",
   "_platformCommonBase": "https://50dcbee2-0809-4bf1-801f-b820c18e9816.e1-us-east-azure.choreoapps.dev/"
 }
