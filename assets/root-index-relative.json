@@ -1,5 +1,10 @@
 {
   "products": {
+    "api-platform-cloud": {
+      "slug": "api-platform-cloud",
+      "title": "API Platform Cloud",
+      "manifestUrl": "https://wso2.com/api-platform/docs-staging/api-platform-cloud/product-nav-manifest.json"
+    },
     "cloud": {
       "slug": "cloud",
       "title": "Cloud",
