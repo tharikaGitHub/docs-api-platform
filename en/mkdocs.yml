@@ -95,40 +95,41 @@ nav:
         - Sign In and Organizations: cloud/platform/getting-started/sign-in-and-organizations.md  # from: bijira-concepts/organization.md, administer/configure-enterprise-login/configure-enterprise-login.md
         - Tour of the Management Portal: cloud/platform/getting-started/management-portal-tour.md  # new
         - Quick Start Guide: cloud/platform/getting-started/quick-start-guide.md                # from: introduction/quick-start-guide.md
-    - Develop APIs:
-        - Create an API: cloud/platform/develop-apis/create-an-api.md                           # from: create-api-proxy/overview.md and create-api-proxy/my-apis/** (only the API types and methods supported at launch)
-        - Policies:
-            - Apply Policies: cloud/platform/develop-apis/policies/apply-policies.md             # from: develop-api-proxy/policy/overview.md, policies.md, attach-and-manage-policies.md
-            - Configure Policy System Parameters: cloud/platform/develop-apis/policies/configure-system-parameters.md  # new
-            - Custom Policies: cloud/platform/develop-apis/policies/custom-policies.md           # from: api-platform-gateway/apply-custom-policies-to-apis.md
-            - Build a Custom Policy with Go: cloud/platform/develop-apis/policies/build-a-custom-policy-with-go.md  # from: api-platform-gateway/writing-a-custom-policy.md, build-gateway-with-custom-policies.md (only if Go extensibility ships for cloud)
-        # pending: - Test an API: cloud/platform/develop-apis/test-an-api.md                     # from: test-api-proxy/openapi-console.md, curl.md
-    - Secure APIs:
-        - Secure APIs with OAuth 2.0: cloud/platform/secure-apis/secure-apis-with-oauth2.md      # from: develop-api-proxy/authentication-and-authorization/secure-api-access-with-bijira-sts.md
-        - Manage Secrets: cloud/platform/secure-apis/manage-secrets.md                          # new
-    - Deploy:
-        - Environments: cloud/platform/deploy/environments.md                                   # from: administer/manage-environments/manage-environments.md
-        - Promote APIs Between Environments: cloud/platform/deploy/promote-apis-between-environments.md  # from: administer/manage-cd-pipelines/manage-cd-pipelines.md
-        - Gateways:
-            - Internal and External Gateways: cloud/platform/deploy/gateways/internal-and-external-gateways.md  # new (concept framing from bijira-concepts/data-planes.md)
-            - Custom Gateway Domains: cloud/platform/deploy/gateways/custom-gateway-domains.md   # from: administer/settings/configure-a-custom-domain-for-your-organization.md (Bijira is per organization; this is per gateway)
-    - Publish and Consume:
-        - Publish APIs to the Developer Portal: cloud/platform/publish-and-consume/publish-apis-to-the-developer-portal.md  # from: develop-api-proxy/lifecycle-management.md, api-platform-gateway/publish-apis/*.md
+    - API Control Plane:
+        - Develop APIs:
+            - Create an API: cloud/platform/develop-apis/create-an-api.md                           # from: create-api-proxy/overview.md and create-api-proxy/my-apis/** (only the API types and methods supported at launch)
+            - Policies:
+                - Apply Policies: cloud/platform/develop-apis/policies/apply-policies.md             # from: develop-api-proxy/policy/overview.md, policies.md, attach-and-manage-policies.md
+                - Configure Policy System Parameters: cloud/platform/develop-apis/policies/configure-system-parameters.md  # new
+                - Custom Policies: cloud/platform/develop-apis/policies/custom-policies.md           # from: api-platform-gateway/apply-custom-policies-to-apis.md
+                - Build a Custom Policy with Go: cloud/platform/develop-apis/policies/build-a-custom-policy-with-go.md  # from: api-platform-gateway/writing-a-custom-policy.md, build-gateway-with-custom-policies.md (only if Go extensibility ships for cloud)
+            # pending: - Test an API: cloud/platform/develop-apis/test-an-api.md                     # from: test-api-proxy/openapi-console.md, curl.md
+        - Secure APIs:
+            - Secure APIs with OAuth 2.0: cloud/platform/secure-apis/secure-apis-with-oauth2.md      # from: develop-api-proxy/authentication-and-authorization/secure-api-access-with-bijira-sts.md
+            - Manage Secrets: cloud/platform/secure-apis/manage-secrets.md                          # new
+        - Deploy:
+            - Environments: cloud/platform/deploy/environments.md                                   # from: administer/manage-environments/manage-environments.md
+            - Promote APIs Between Environments: cloud/platform/deploy/promote-apis-between-environments.md  # from: administer/manage-cd-pipelines/manage-cd-pipelines.md
+            - Gateways:
+                - Internal and External Gateways: cloud/platform/deploy/gateways/internal-and-external-gateways.md  # new (concept framing from bijira-concepts/data-planes.md)
+                - Custom Gateway Domains: cloud/platform/deploy/gateways/custom-gateway-domains.md   # from: administer/settings/configure-a-custom-domain-for-your-organization.md (Bijira is per organization; this is per gateway)
+        - Publish APIs: cloud/platform/publish-and-consume/publish-apis-to-the-developer-portal.md  # from: develop-api-proxy/lifecycle-management.md, api-platform-gateway/publish-apis/*.md
         # pending: - Subscription Plans: cloud/platform/publish-and-consume/subscription-plans.md  # from: develop-api-proxy/subscription-plans.md, administer/settings/create-api-subscription-plans.md
         - Developer Portal: cloud/platform/publish-and-consume/developer-portal.md              # from: devportal/** (keep short; link to the API Portal component docs)
-        - AI Workspace: cloud/platform/publish-and-consume/ai-workspace.md                      # from: ai-workspace/overview.md (keep short; link to the AI Workspace component docs)
-    - Govern:
-        - API Governance: cloud/platform/govern/api-governance.md                               # from: governance/overview.md, governance/govern-api-proxy.md
-    # pending: - Monitor:
-    # pending:     - Logs: cloud/platform/monitor/logs.md                                         # from: monitoring-and-insights/logs/*.md
-    # pending:     - Status Page: cloud/platform/monitor/status-page.md                           # from: monitoring-and-insights/status-page.md
-    - Administer:
-        - Users and Roles: cloud/platform/administer/users-and-roles.md                         # new
-        - Event Notifications: cloud/platform/administer/event-notifications.md                 # new
-    - Platform API:
-        - Overview and Authentication: cloud/platform/platform-api/overview.md                  # new
-        - Events Reference: cloud/platform/platform-api/events-reference.md                     # new
-        - API Reference: cloud/platform/platform-api/api-reference.md                           # new
+        - Govern:
+            - API Governance: cloud/platform/govern/api-governance.md                               # from: governance/overview.md, governance/govern-api-proxy.md
+        # pending: - Monitor:
+        # pending:     - Logs: cloud/platform/monitor/logs.md                                         # from: monitoring-and-insights/logs/*.md
+        # pending:     - Status Page: cloud/platform/monitor/status-page.md                           # from: monitoring-and-insights/status-page.md
+        - Administer:
+            - Users and Roles: cloud/platform/administer/users-and-roles.md                         # new
+            - Event Notifications: cloud/platform/administer/event-notifications.md                 # new
+        - Platform API:
+            - Overview and Authentication: cloud/platform/platform-api/overview.md                  # new
+            - Events Reference: cloud/platform/platform-api/events-reference.md                     # new
+            - API Reference: cloud/platform/platform-api/api-reference.md                           # new
+    - AI Workspace:
+        - Overview: cloud/platform/publish-and-consume/ai-workspace.md                      # from: ai-workspace/overview.md (keep short; link to the AI Workspace component docs)
 
 markdown_extensions:
   - markdown.extensions.admonition
