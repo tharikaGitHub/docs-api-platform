@@ -35,7 +35,7 @@ Because each component has its own release cycle, not every version of one compo
 
 ## Use your gateways with API Platform Cloud
 
-API Gateway and AI Gateway can also run in hybrid mode: the gateway runs on your infrastructure, and you manage it from API Platform Cloud. API Platform Cloud supports specific gateway versions in hybrid mode. For more information, see [API Platform Cloud](../api-platform-cloud/).
+API Gateway and AI Gateway can also run in hybrid mode: the gateway runs on your infrastructure, and you manage it from API Platform Cloud. API Platform Cloud supports specific gateway versions in hybrid mode. For more information, see [API Platform Cloud](../cloud/platform/).
 
 ## Choose where to start
 
