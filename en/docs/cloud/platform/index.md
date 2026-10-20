@@ -44,7 +44,7 @@ API Gateway and AI Gateway can also run in hybrid mode: the gateway runs on your
 ### Publish and consume
 
 - **Developer Portal:** Publish APIs so that application developers can discover, subscribe to, and try them. See [Publish APIs to the Developer Portal](publish-and-consume/publish-apis-to-the-developer-portal.md) and [Developer Portal](publish-and-consume/developer-portal.md).
-- **AI Workspace:** Manage AI services such as LLM providers and MCP servers alongside your APIs. See [AI Workspace](publish-and-consume/ai-workspace.md).
+- **AI Workspace:** Manage AI services such as LLM providers and MCP servers alongside your APIs. See [AI Workspace](ai-workspace/overview.md).
 
 ### Govern
 

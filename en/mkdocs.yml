@@ -129,7 +129,53 @@ nav:
             - Events Reference: cloud/platform/platform-api/events-reference.md                     # new
             - API Reference: cloud/platform/platform-api/api-reference.md                           # new
     - AI Workspace:
-        - Overview: cloud/platform/publish-and-consume/ai-workspace.md                      # from: ai-workspace/overview.md (keep short; link to the AI Workspace component docs)
+        - Overview: cloud/platform/ai-workspace/overview.md                                         # from: cloud/ai-workspace/overview.md
+        - Quickstart: cloud/platform/ai-workspace/quickstart.md                                     # from: cloud/ai-workspace/quickstart.md
+        - Getting Started: cloud/platform/ai-workspace/getting-started.md                           # from: cloud/ai-workspace/getting-started.md
+        - AI Gateways:
+            - Setting Up: cloud/platform/ai-workspace/ai-gateways/setting-up.md                     # from: cloud/ai-workspace/ai-gateways/setting-up.md
+        - LLM Providers:
+            - Overview: cloud/platform/ai-workspace/llm-providers/overview.md                       # from: cloud/ai-workspace/llm-providers/overview.md
+            - Configure Provider: cloud/platform/ai-workspace/llm-providers/configure-provider.md   # from: cloud/ai-workspace/llm-providers/configure-provider.md
+            - Manage Provider: cloud/platform/ai-workspace/llm-providers/manage-provider.md         # from: cloud/ai-workspace/llm-providers/manage-provider.md
+        - App LLM Proxies:
+            - Overview: cloud/platform/ai-workspace/llm-proxies/overview.md                         # from: cloud/ai-workspace/llm-proxies/overview.md
+            - Configure App LLM Proxy: cloud/platform/ai-workspace/llm-proxies/configure-proxy.md   # from: cloud/ai-workspace/llm-proxies/configure-proxy.md
+            - Manage App LLM Proxy: cloud/platform/ai-workspace/llm-proxies/manage-proxy.md         # from: cloud/ai-workspace/llm-proxies/manage-proxy.md
+        - MCP Proxies:
+            - Overview: cloud/platform/ai-workspace/mcp-proxies/overview.md                         # from: cloud/ai-workspace/mcp-proxies/overview.md
+            - Configure Proxy: cloud/platform/ai-workspace/mcp-proxies/configure-proxy.md           # from: cloud/ai-workspace/mcp-proxies/configure-proxy.md
+            - Apply Policies: cloud/platform/ai-workspace/mcp-proxies/apply-policies.md             # from: cloud/ai-workspace/mcp-proxies/apply-policies.md
+        - MCP Registry:
+            - What is an MCP Registry?: cloud/platform/ai-workspace/mcp-registry/mcp-registry.md    # from: cloud/mcp-servers/mcp-registry.md
+            - Publish MCP Proxies: cloud/platform/ai-workspace/mcp-registry/publish-mcp-proxies.md  # from: cloud/mcp-servers/publish-mcp-proxies.md
+            - Browse the MCP Hub: cloud/platform/ai-workspace/mcp-registry/browse-mcp-hub.md        # from: cloud/mcp-servers/browse-mcp-hub.md
+            - Use the MCP Registry API: cloud/platform/ai-workspace/mcp-registry/mcp-registry-api.md  # from: cloud/mcp-servers/mcp-registry-api.md
+        - GenAI Applications: cloud/platform/ai-workspace/genai-applications.md                     # from: cloud/ai-workspace/genai-applications.md
+        - Configure Inbound Auth: cloud/platform/ai-workspace/configure-inbound-auth.md             # from: cloud/ai-workspace/configure-inbound-auth.md
+        - Invoke via SDKs: cloud/platform/ai-workspace/using-sdks.md                                # from: cloud/ai-workspace/using-sdks.md
+# pending: - Insights: cloud/platform/ai-workspace/insights.md                                      # from: cloud/ai-workspace/insights.md
+        - Policies:
+            - Overview: cloud/platform/ai-workspace/policies/overview.md                            # from: cloud/ai-workspace/policies/overview.md
+            - Guardrails:
+                - Overview: cloud/platform/ai-workspace/policies/guardrails/overview.md             # from: cloud/ai-workspace/policies/guardrails/overview.md
+# pending: - Semantic Prompt Guard: cloud/platform/ai-workspace/policies/guardrails/semantic-prompt-guard.md  # from: cloud/ai-workspace/policies/guardrails/semantic-prompt-guard.md
+                - PII Masking Regex: cloud/platform/ai-workspace/policies/guardrails/regex-pii-masking.md  # from: cloud/ai-workspace/policies/guardrails/regex-pii-masking.md
+                - Azure Content Safety: cloud/platform/ai-workspace/policies/guardrails/azure-content-safety.md  # from: cloud/ai-workspace/policies/guardrails/azure-content-safety.md
+                - Word Count: cloud/platform/ai-workspace/policies/guardrails/word-count-guardrail.md  # from: cloud/ai-workspace/policies/guardrails/word-count-guardrail.md
+                - Sentence Count: cloud/platform/ai-workspace/policies/guardrails/sentence-count-guardrail.md  # from: cloud/ai-workspace/policies/guardrails/sentence-count-guardrail.md
+            - Rate Limit:
+                - LLM Cost: cloud/platform/ai-workspace/policies/rate-limit/llm-cost.md             # from: cloud/ai-workspace/policies/rate-limit/llm-cost.md
+                - Token-Based Rate Limit: cloud/platform/ai-workspace/policies/rate-limit/token-based-rate-limit.md  # from: cloud/ai-workspace/policies/rate-limit/token-based-rate-limit.md
+                - LLM Cost-Based Rate Limit: cloud/platform/ai-workspace/policies/rate-limit/llm-cost-based-rate-limit.md  # from: cloud/ai-workspace/policies/rate-limit/llm-cost-based-rate-limit.md
+            - Other Policies:
+# pending: - Token-Based Rate Limit: cloud/platform/ai-workspace/policies/other-policies/token-based-rate-limit.md  # from: cloud/ai-workspace/policies/other-policies/token-based-rate-limit.md
+# pending: - Rate Limit - Basic: cloud/platform/ai-workspace/policies/other-policies/basic-rate-limit.md  # from: cloud/ai-workspace/policies/other-policies/basic-rate-limit.md
+                - Model Round Robin: cloud/platform/ai-workspace/policies/other-policies/model-round-robin.md  # from: cloud/ai-workspace/policies/other-policies/model-round-robin.md
+                - Prompt Decorator: cloud/platform/ai-workspace/policies/other-policies/prompt-decorator.md  # from: cloud/ai-workspace/policies/other-policies/prompt-decorator.md
+                - Prompt Template: cloud/platform/ai-workspace/policies/other-policies/prompt-template.md  # from: cloud/ai-workspace/policies/other-policies/prompt-template.md
+                - Semantic Cache: cloud/platform/ai-workspace/policies/other-policies/semantic-cache.md  # from: cloud/ai-workspace/policies/other-policies/semantic-cache.md
+            - Writing an AI Policy: cloud/platform/ai-workspace/policies/writing-an-ai-policy.md    # from: cloud/ai-workspace/policies/writing-an-ai-policy.md
 
 markdown_extensions:
   - markdown.extensions.admonition
