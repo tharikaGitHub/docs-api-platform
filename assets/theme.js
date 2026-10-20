@@ -668,13 +668,20 @@ onEachPage(function () {
   // piece of product-identifying context a cross-origin asset fetch can
   // never give, but `location` already has for free. _liveSiteBase (below)
   // gives the common prefix every product's URL shares; the first path
-  // segment after it is this page's own product slug.
-  function currentSlugFromLocation(liveSiteBase) {
+  // segment after it is this page's own product slug. A slug can also span
+  // segments (API Platform Cloud's cloud/platform sits under Bijira's cloud):
+  // the longest product slug the path starts with wins.
+  function currentSlugFromLocation(liveSiteBase, slugs) {
     try {
       var basePath = new URL(liveSiteBase, location).pathname.replace(/\/+$/, '') + '/';
       var path = location.pathname;
       if (path.indexOf(basePath) !== 0) return null;
-      return path.slice(basePath.length).split('/')[0] || null;
+      var rest = path.slice(basePath.length) + '/';
+      var best = null;
+      (slugs || []).forEach(function (slug) {
+        if (rest.indexOf(slug + '/') === 0 && (!best || slug.length > best.length)) best = slug;
+      });
+      return best || rest.split('/')[0] || null;
     } catch (e) {
       return null;
     }
@@ -765,7 +772,7 @@ onEachPage(function () {
     var names = Object.keys(modes.options);
     var owners = names.filter(function (name) {
       var mode = modes.options[name];
-      var landingSlug = (mode.landing || '').split('/')[0];
+      var landingSlug = (mode.landing || '').replace(/\/+$/, '');
       return (mode.products || []).indexOf(slug) !== -1 || (slug && landingSlug === slug);
     });
     if (owners.length === 1) {
@@ -1358,9 +1365,8 @@ onEachPage(function () {
       // if the mounted root-index.json provides one - falls back to that
       // hardcoded default if this fetch hasn't resolved yet or fails.
       if (index._liveSiteBase) LIVE_SITE_BASE = index._liveSiteBase;
-      var currentSlug = currentSlugFromLocation(LIVE_SITE_BASE);
-
       var products = index.products || {};
+      var currentSlug = currentSlugFromLocation(LIVE_SITE_BASE, Object.keys(products));
 
       // This page's own sections, rendered server-side under their build-time
       // names; give them the root index's name and badge too.

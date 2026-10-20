@@ -1,9 +1,9 @@
 {
   "products": {
-    "api-platform-cloud": {
-      "slug": "api-platform-cloud",
+    "cloud/platform": {
+      "slug": "cloud/platform",
       "title": "API Platform Cloud",
-      "manifestUrl": "https://wso2.com/api-platform/docs-staging/api-platform-cloud/product-nav-manifest.json"
+      "manifestUrl": "https://wso2.com/api-platform/docs-staging/cloud/platform/product-nav-manifest.json"
     },
     "api-manager": {
       "slug": "api-manager",
@@ -72,13 +72,13 @@
     "options": {
       "cloud": {
         "title": "Cloud",
-        "landing": "api-platform-cloud/",
+        "landing": "cloud/platform/",
         "links": {
-          "Overview": "api-platform-cloud/",
-          "Get Started": "api-platform-cloud/getting-started/quick-start-guide/"
+          "Overview": "cloud/platform/",
+          "Get Started": "cloud/platform/getting-started/quick-start-guide/"
         },
         "products": [
-          "api-platform-cloud",
+          "cloud/platform",
           "api-gateway",
           "ai-gateway",
           "analytics",
@@ -89,7 +89,7 @@
           "cloud"
         ],
         "flatten": {
-          "product": "api-platform-cloud",
+          "product": "cloud/platform",
           "topLinks": {
             "Overview": "Introduction",
             "Get Started": "Getting Started"
