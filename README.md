@@ -85,7 +85,7 @@ cd en
 python -m mkdocs serve
 ```
 
-The documentation will be available at: [http://localhost:8000/api-platform/docs/api-platform-cloud/](http://localhost:8000/api-platform/docs/api-platform-cloud/)
+The documentation will be available at: [http://localhost:8000/api-platform/docs/cloud/platform/](http://localhost:8000/api-platform/docs/cloud/platform/)
 
 This branch builds only the API Platform Cloud docs, so `http://localhost:8000/api-platform/docs/` itself returns 404. The Overview and Get Started links in the nav point at the `platform-common` deployment.
 
@@ -126,7 +126,7 @@ The built site will be generated in the `site/` directory.
 docs-api-platform/               # cloud-api-platform branch
 ├── en/                          # English documentation
 │   ├── docs/                    # Documentation source files
-│   │   └── api-platform-cloud/  # API Platform Cloud pages
+│   │   └── cloud/platform/      # API Platform Cloud pages
 │   ├── theme/                   # Custom theme files
 │   ├── devportal-theming/       # Theming assets
 │   ├── mkdocs.yml               # MkDocs configuration
