@@ -993,6 +993,71 @@ onEachPage(function () {
     });
   }
 
+  // A product can point its readers somewhere else with a pill that stays in
+  // view (products.<slug>.shortcut in root-index.json), e.g. API Platform
+  // Cloud pages pointing former Bijira customers to the deprecated Bijira
+  // docs. On wide screens it sits at the top of the "On this page" column,
+  // which stays put while the page scrolls, so it never covers the page's
+  // own top bar or Material's Back to top button; on narrower screens, where
+  // that column is hidden, it sits at the top of the page content.
+  function renderShortcut(shortcut) {
+    if (!document.getElementById('md-shortcut-style')) {
+      var style = document.createElement('style');
+      style.id = 'md-shortcut-style';
+      style.textContent =
+        '.md-shortcut{display:inline-flex;align-items:center;gap:.4rem;margin:0 0 .8rem;' +
+        'padding:.35rem .8rem;border-radius:1.6rem;background:var(--md-default-bg-color);' +
+        'box-shadow:var(--md-shadow-z2);color:var(--md-default-fg-color--light);' +
+        'font-size:.7rem;line-height:1.2;text-decoration:none}' +
+        '.md-shortcut:hover,.md-shortcut:focus-visible{color:var(--md-accent-fg-color)}' +
+        '.md-shortcut__badge{padding:0 .4rem;border:1px solid var(--md-default-fg-color--lighter);' +
+        'border-radius:.6rem;font-size:.55rem;color:var(--md-default-fg-color--light)}' +
+        '.md-shortcut[hidden]{display:none}';
+      document.head.appendChild(style);
+      // Which copy shows depends on whether the theme displays the "On this
+      // page" column at the current width, so check the column itself.
+      window.addEventListener('resize', placeShortcut);
+    }
+
+    function build(id, extraClass) {
+      var old = document.getElementById(id);
+      if (old) old.remove();
+      var link = document.createElement('a');
+      link.id = id;
+      link.className = 'md-shortcut' + extraClass;
+      link.href = new URL(shortcut.path || '', LIVE_SITE_BASE).href;
+      link.appendChild(document.createTextNode(shortcut.title + ' →'));
+      if (shortcut.badge) {
+        var badge = document.createElement('span');
+        badge.className = 'md-shortcut__badge';
+        badge.textContent = shortcut.badge;
+        link.appendChild(badge);
+      }
+      // A different deployment: skip instant loading.
+      link.addEventListener('click', function (e) {
+        if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        e.preventDefault();
+        window.location.href = link.href;
+      });
+      return link;
+    }
+
+    var toc = document.querySelector('.md-sidebar--secondary .md-sidebar__inner');
+    if (toc) toc.insertBefore(build('md-shortcut-toc', ' md-shortcut--toc'), toc.firstChild);
+    var content = document.querySelector('.md-content__inner');
+    if (content) content.insertBefore(build('md-shortcut-content', ' md-shortcut--content'), content.firstChild);
+    placeShortcut();
+  }
+
+  function placeShortcut() {
+    var inToc = document.getElementById('md-shortcut-toc');
+    var inContent = document.getElementById('md-shortcut-content');
+    var column = document.querySelector('.md-sidebar--secondary');
+    var tocShown = !!(inToc && column && getComputedStyle(column).display !== 'none' && column.getBoundingClientRect().width > 0);
+    if (inToc) inToc.hidden = !tocShown;
+    if (inContent) inContent.hidden = tocShown;
+  }
+
   // The toggle lives in the header (which instant loading keeps across
   // pages) and, for narrow screens where the header has no room, at the top
   // of the sidebar drawer. Both are rebuilt on every page so their click
@@ -1434,6 +1499,10 @@ onEachPage(function () {
         var ownSection = primaryList.querySelector(':scope > [data-md-xproduct="' + flatten.product + '"]');
         if (ownSection) flattenSection(ownSection, flatten);
         if (currentSlug === flatten.product) renameBreadcrumbs(flatten.topLinks);
+      }
+
+      if (currentSlug && products[currentSlug] && products[currentSlug].shortcut) {
+        renderShortcut(products[currentSlug].shortcut);
       }
 
       if (activeMode) {

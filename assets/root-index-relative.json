@@ -3,7 +3,12 @@
     "cloud/platform": {
       "slug": "cloud/platform",
       "title": "API Platform Cloud",
-      "manifestUrl": "https://wso2.com/api-platform/docs-staging/cloud/platform/product-nav-manifest.json"
+      "manifestUrl": "https://wso2.com/api-platform/docs-staging/cloud/platform/product-nav-manifest.json",
+      "shortcut": {
+        "title": "Go to Bijira docs",
+        "badge": "Deprecated",
+        "path": "cloud/"
+      }
     },
     "api-manager": {
       "slug": "api-manager",
