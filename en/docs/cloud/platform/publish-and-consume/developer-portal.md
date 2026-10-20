@@ -35,4 +35,4 @@ For a walkthrough of these steps, see the [Quick start guide](../getting-started
 
 ## Learn more
 
-The Developer Portal is built on API Portal. For details on its features, see the [API Portal documentation]({BASE_URL}/api-portal/).
+The Developer Portal is built on API Portal. For details on its features, see the [API Portal documentation](../../../../api-portal/).

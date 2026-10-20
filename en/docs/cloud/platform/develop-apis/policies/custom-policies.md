@@ -28,7 +28,7 @@ Custom policies let you run your own logic on API calls when the built-in polici
 
 A gateway that includes your custom policy sends a policy manifest to API Platform Cloud each time it connects. The manifest lists every policy installed on the gateway. You then sync the custom policies from that manifest to your organization, which makes them available to every API in the organization.
 
-To write a custom policy and build a gateway that includes it, see [Build a custom policy with Go](build-a-custom-policy-with-go.md). For information on running the gateway, see the [API Gateway documentation]({BASE_URL}/api-gateway/).
+To write a custom policy and build a gateway that includes it, see [Build a custom policy with Go](build-a-custom-policy-with-go.md). For information on running the gateway, see the [API Gateway documentation](../../../../../api-gateway/).
 
 ## Step 1: View the policies on a gateway
 

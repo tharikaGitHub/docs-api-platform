@@ -42,7 +42,7 @@ When you attach more than one policy to a flow, the gateway runs them in the ord
 
 ## Built-in policies
 
-API Platform Cloud provides built-in policies for common security, traffic control, and transformation tasks. For the full catalog of policies, see [Policy Hub]({BASE_URL}/policy-hub/).
+API Platform Cloud provides built-in policies for common security, traffic control, and transformation tasks. For the full catalog of policies, see [Policy Hub](../../../../../policy-hub/overview/).
 
 ### API-level policies
 

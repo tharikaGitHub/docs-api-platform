@@ -396,7 +396,7 @@ Use the `ap` CLI to build a gateway image that includes your policy.
 !!! tip "Sample custom policies"
     For working examples, see the [sample policies in the api-platform repository](https://github.com/wso2/api-platform/tree/main/gateway/sample-policies).
 
-To run the gateway with the new images, see the [API Gateway documentation]({BASE_URL}/api-gateway/).
+To run the gateway with the new images, see the [API Gateway documentation](../../../../../api-gateway/).
 
 ## What's next
 

@@ -31,8 +31,8 @@ AI Workspace is the control plane for AI traffic in API Platform Cloud. It manag
 
 ## How AI Workspace relates to AI Gateway
 
-AI Workspace is the control plane, and [AI Gateway]({BASE_URL}/ai-gateway/) is the runtime that handles the traffic. You configure providers, proxies, and policies in AI Workspace and deploy them to one or more connected gateways.
+AI Workspace is the control plane, and [AI Gateway](../../../../ai-gateway/) is the runtime that handles the traffic. You configure providers, proxies, and policies in AI Workspace and deploy them to one or more connected gateways.
 
 ## Learn more
 
-For setup and task-level guides, see the [AI Workspace documentation]({BASE_URL}/ai-workspace/).
+For setup and task-level guides, see the [AI Workspace documentation](../../../../ai-workspace/).
