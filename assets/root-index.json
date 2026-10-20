@@ -81,6 +81,7 @@
           "cloud/platform",
           "api-gateway",
           "ai-gateway",
+          "api-portal",
           "analytics",
           "monetization",
           "policy-hub",
@@ -94,6 +95,9 @@
             "Overview": "Introduction",
             "Get Started": "Getting Started"
           }
+        },
+        "titles": {
+          "api-portal": "Devportal"
         },
         "groups": [
           {

@@ -1368,16 +1368,29 @@ onEachPage(function () {
       var products = index.products || {};
       var currentSlug = currentSlugFromLocation(LIVE_SITE_BASE, Object.keys(products));
 
+      var modes = index._modes && index._modes.options ? index._modes : null;
+      var activeMode = modes ? resolveMode(modes, currentSlug) : null;
+      var modeProducts = activeMode ? (modes.options[activeMode].products || []) : null;
+
+      // A mode can show a product under its own name (_modes.options.<mode>.
+      // titles), e.g. API Portal as "Devportal" in Cloud mode.
+      var modeTitles = activeMode ? (modes.options[activeMode].titles || {}) : {};
+      if (Object.keys(modeTitles).length) {
+        var renamed = {};
+        Object.keys(products).forEach(function (slug) {
+          renamed[slug] = modeTitles[slug]
+            ? Object.assign({}, products[slug], { title: modeTitles[slug] })
+            : products[slug];
+        });
+        products = renamed;
+      }
+
       // This page's own sections, rendered server-side under their build-time
-      // names; give them the root index's name and badge too.
+      // names; give them the root index's (or the mode's) name and badge too.
       Array.prototype.forEach.call(primaryList.children, function (item) {
         var slug = item.getAttribute('data-md-versioned-section') || item.getAttribute('data-md-xproduct');
         if (slug) decorateSection(item, products[slug]);
       });
-
-      var modes = index._modes && index._modes.options ? index._modes : null;
-      var activeMode = modes ? resolveMode(modes, currentSlug) : null;
-      var modeProducts = activeMode ? (modes.options[activeMode].products || []) : null;
 
       // Overview/Get Started are plain top-level links, baked into every
       // branch's own mkdocs.yml nav pointing at platform-common's URL at
