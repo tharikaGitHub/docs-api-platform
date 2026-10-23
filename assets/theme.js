@@ -1365,6 +1365,178 @@ onEachPage(function () {
     insertProductSection(li, slug, order, style.hr);
   }
 
+  // Cloud / Self-managed toggle
+  // ---------------------------------------------------------------------
+  // root-index.json's optional _deployments list names each deployment, the
+  // page it links to (relative to _liveSiteBase), and the products whose
+  // pages belong to it ("self-managed" being the Self-managed landing page's
+  // own path). The entry marked default is active everywhere else. Each
+  // option is a plain link to that deployment's docs, so switching is
+  // ordinary navigation within this site.
+  // Returns the active entry, or null without _deployments (no toggle).
+  //
+  // The toggle sits in the header (which instant loading keeps across pages)
+  // and, for narrow screens where the header has no room, at the top of the
+  // sidebar drawer. Both are rebuilt on every page so the active option
+  // follows the current page.
+  function renderDeploymentToggle(deployments, currentSlug) {
+    if (!Array.isArray(deployments) || !deployments.length) return null;
+    if (!document.getElementById('md-deployment-toggle-style')) {
+      var style = document.createElement('style');
+      style.id = 'md-deployment-toggle-style';
+      style.textContent =
+        // Sit right after the site title, on the left, styled like the toggle
+        // of the API Platform Cloud docs: a grey rounded track with the
+        // selected option as a white pill. Sizes in px (Material's rem is 20px).
+        '.md-header__inner:has(.md-deployment-toggle) .md-header__title{flex-grow:0}' +
+        '.md-header__inner .md-deployment-toggle{margin-right:auto}' +
+        '.md-deployment-toggle{display:inline-flex;flex-shrink:0;align-self:center;align-items:center;gap:2px;' +
+        'margin:0 12px 0 24px;padding:3.2px;border:1px solid #d8dde8;border-radius:999px;background:#f5f6f7}' +
+        '.md-deployment-toggle a{padding:4.8px 14.4px;border-radius:999px;color:#606770;font-size:14px;' +
+        'line-height:1.4;white-space:nowrap}' +
+        '.md-deployment-toggle a:hover{color:var(--md-default-fg-color)}' +
+        '.md-deployment-toggle a[aria-current="true"]{background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.12);' +
+        'color:var(--md-default-fg-color);font-weight:500}' +
+        '.md-deployment-toggle a:focus-visible{outline:2px solid var(--md-accent-fg-color);outline-offset:1px}' +
+        '[data-md-color-scheme=slate] .md-deployment-toggle{border-color:rgba(255,255,255,.1);background:rgba(255,255,255,.05)}' +
+        '[data-md-color-scheme=slate] .md-deployment-toggle a{color:rgba(226,228,233,.6)}' +
+        '[data-md-color-scheme=slate] .md-deployment-toggle a[aria-current="true"]{background:var(--md-default-bg-color);' +
+        'color:var(--md-default-fg-color)}' +
+        '.md-deployment-toggle--drawer{display:none}' +
+        '@media screen and (max-width:76.1875em){.md-header .md-deployment-toggle{display:none}' +
+        '.md-deployment-toggle--drawer{display:flex;margin:12px 16px}' +
+        '.md-deployment-toggle--drawer a{flex:1;text-align:center}}';
+      document.head.appendChild(style);
+    }
+
+    var active = deployments.filter(function (d) {
+      return (d.products || []).indexOf(currentSlug) !== -1;
+    })[0] || deployments.filter(function (d) { return d.default; })[0] || deployments[0];
+
+    function build(id, extraClass) {
+      var old = document.getElementById(id);
+      if (old) old.remove();
+      var group = document.createElement('nav');
+      group.id = id;
+      group.className = 'md-deployment-toggle' + extraClass;
+      group.setAttribute('aria-label', 'Deployment');
+      deployments.forEach(function (d) {
+        var link = document.createElement('a');
+        link.href = new URL(d.path || '', LIVE_SITE_BASE).href;
+        link.textContent = d.title;
+        if (d === active) link.setAttribute('aria-current', 'true');
+        group.appendChild(link);
+      });
+      return group;
+    }
+
+    var headerTitle = document.querySelector('.md-header__inner .md-header__title');
+    if (headerTitle) {
+      headerTitle.parentNode.insertBefore(build('md-deployment-toggle', ''), headerTitle.nextSibling);
+    }
+    primaryList.parentNode.insertBefore(build('md-deployment-toggle-drawer', ' md-deployment-toggle--drawer'), primaryList);
+    return active;
+  }
+
+  // The sidebar shows only the active deployment's sections: a product that
+  // another deployment lists (and the active one doesn't) is left out, so
+  // Cloud shows no versioned components and Self-managed no Cloud section.
+  // Sections neither lists (Guides, Policy Hub, ...) show in both.
+  function productsOutside(deployments, active) {
+    if (!active) return [];
+    var own = active.products || [];
+    var hidden = [];
+    deployments.forEach(function (d) {
+      if (d === active) return;
+      (d.products || []).forEach(function (slug) {
+        if (own.indexOf(slug) === -1 && hidden.indexOf(slug) === -1) hidden.push(slug);
+      });
+    });
+    return hidden;
+  }
+
+  // This page's own server-rendered sections for those products, with the
+  // divider nav-item.html renders right before each one.
+  function hideSections(slugs) {
+    Array.prototype.forEach.call(primaryList.children, function (item) {
+      var slug = item.getAttribute('data-md-versioned-section') || item.getAttribute('data-md-xproduct');
+      if (!slug || slugs.indexOf(slug) === -1) return;
+      item.style.display = 'none';
+      var prev = item.previousElementSibling;
+      if (prev && prev.tagName === 'HR') prev.style.display = 'none';
+    });
+  }
+
+  // A product marked flattenOwnSection in root-index.json drops its own
+  // section heading on its own pages: the section's groups become top-level
+  // sidebar items, e.g. Bijira's pages list Introduction, Create API Proxy,
+  // ... directly instead of under a "Cloud" dropdown. Moved groups keep the
+  // product's slug, so other products' sections still sort after them.
+  function flattenOwnSection(slug) {
+    var sectionLi = primaryList.querySelector(':scope > [data-md-xproduct="' + slug + '"]');
+    var list = sectionLi && sectionLi.querySelector(':scope > nav > ul.md-nav__list');
+    if (!list) return;
+    // One divider above the lifted groups (above Introduction on Bijira's
+    // pages), styled like the one between Overview and Get Started.
+    var divider = sectionLi.previousElementSibling;
+    if (!divider || divider.tagName !== 'HR') {
+      divider = document.createElement('hr');
+      divider.className = 'md-nav--expanded-section-divider';
+      primaryList.insertBefore(divider, sectionLi);
+    }
+    Array.prototype.slice.call(list.children).forEach(function (child) {
+      child.setAttribute('data-md-xproduct', slug);
+      primaryList.insertBefore(child, sectionLi);
+    });
+    sectionLi.remove();
+  }
+
+  // A deployment's optional banner (_deployments[].banner: text, linkText,
+  // path relative to _liveSiteBase) shows at the top of the content on that
+  // deployment's own pages, e.g. on Bijira's Cloud pages a pointer to the
+  // new API Platform Cloud docs. Rebuilt on every page (instant loading
+  // swaps the content).
+  function renderDeploymentBanner(banner) {
+    var old = document.getElementById('md-deployment-banner');
+    if (old) old.remove();
+    var content = document.querySelector('.md-content__inner');
+    if (!banner || !content) return;
+    if (!document.getElementById('md-deployment-banner-style')) {
+      var style = document.createElement('style');
+      style.id = 'md-deployment-banner-style';
+      style.textContent =
+        '.md-deployment-banner{display:flex;align-items:center;gap:.6rem;margin:0 0 1.2rem;padding:.6rem .8rem;' +
+        'border:1px solid rgba(255,115,0,.35);border-radius:.4rem;background:rgba(255,115,0,.06);' +
+        'font-size:.75rem;line-height:1.4}' +
+        // Inside .md-typeset, where links are orange: only the call to action is.
+        '.md-typeset a.md-deployment-banner,.md-typeset a.md-deployment-banner:hover{color:var(--md-default-fg-color)}' +
+        '.md-deployment-banner:hover{border-color:var(--md-primary-fg-color);background:rgba(255,115,0,.1)}' +
+        '.md-deployment-banner__text{flex:1}' +
+        '.md-typeset .md-deployment-banner__link{color:var(--md-primary-fg-color)}' +
+        '.md-deployment-banner svg{flex-shrink:0;opacity:.7}';
+      document.head.appendChild(style);
+    }
+    var link = document.createElement('a');
+    link.id = 'md-deployment-banner';
+    link.className = 'md-deployment-banner';
+    link.href = new URL(banner.path || '', LIVE_SITE_BASE).href;
+    // It leads to the other docs site, so it opens in a new tab.
+    link.target = '_blank';
+    link.rel = 'noopener';
+    link.innerHTML =
+      '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" ' +
+      'stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>' +
+      '<span class="md-deployment-banner__text"></span><span aria-hidden="true">↗</span>';
+    var text = link.querySelector('.md-deployment-banner__text');
+    text.appendChild(document.createTextNode((banner.text || '') + ' '));
+    var cta = document.createElement('span');
+    cta.className = 'md-deployment-banner__link';
+    cta.textContent = banner.linkText || 'View the docs';
+    text.appendChild(cta);
+    var heading = content.querySelector('h1');
+    content.insertBefore(link, heading && heading.parentNode === content ? heading : content.firstChild);
+  }
+
   fetch(new URL(SHARED_BASE + 'root-index.json', scope)).then(function (r) { return r.ok ? r.json() : {}; })
     .then(function (index) {
       // _liveSiteBase overrides the LIVE_SITE_BASE fallback declared above,
@@ -1373,6 +1545,14 @@ onEachPage(function () {
       if (index._liveSiteBase) LIVE_SITE_BASE = index._liveSiteBase;
       var currentSlug = currentSlugFromLocation(LIVE_SITE_BASE);
 
+      var deployment = renderDeploymentToggle(index._deployments, currentSlug);
+      renderDeploymentBanner(deployment && (deployment.products || []).indexOf(currentSlug) !== -1
+        ? deployment.banner : null);
+      var ownProduct = (index.products || {})[currentSlug];
+      if (ownProduct && ownProduct.flattenOwnSection) flattenOwnSection(currentSlug);
+      var hiddenProducts = productsOutside(index._deployments, deployment);
+      hideSections(hiddenProducts);
+
       // Overview/Get Started are plain top-level links, baked into every
       // branch's own mkdocs.yml nav pointing at platform-common's URL at
       // build time - unlike a product section, they're not in
@@ -1380,14 +1560,17 @@ onEachPage(function () {
       // no data-md-xproduct/data-md-versioned-section to identify them by.
       // Matched by title text instead, among top-level items only, so a
       // platform-common redeploy only means updating _platformCommonBase
-      // here, not editing and rebuilding every product branch.
+      // here, not editing and rebuilding every product branch. With the
+      // Cloud / Self-managed toggle, Overview is the active deployment's page.
       if (index._platformCommonBase) {
         var platformCommonLinks = { 'Overview': '', 'Get Started': 'get-started/' };
         Array.prototype.forEach.call(primaryList.children, function (item) {
           var link = item.querySelector && item.querySelector(':scope > a.md-nav__link');
           if (!link) return;
           var title = link.textContent.trim();
-          if (Object.prototype.hasOwnProperty.call(platformCommonLinks, title)) {
+          if (title === 'Overview' && deployment) {
+            link.href = new URL(deployment.path || '', LIVE_SITE_BASE).href;
+          } else if (Object.prototype.hasOwnProperty.call(platformCommonLinks, title)) {
             link.href = new URL(index._platformCommonBase + platformCommonLinks[title], scope).href;
           }
         });
@@ -1396,7 +1579,7 @@ onEachPage(function () {
       var products = index.products || {};
       var order = Object.keys(products);
       order.forEach(function (slug) {
-        if (slug === currentSlug) return;
+        if (slug === currentSlug || hiddenProducts.indexOf(slug) !== -1) return;
         var product = products[slug];
         fetch(new URL(product.manifestUrl, scope))
           .then(function (r) { return r.ok ? r.json() : null; })

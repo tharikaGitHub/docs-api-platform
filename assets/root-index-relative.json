@@ -3,6 +3,7 @@
     "cloud": {
       "slug": "cloud",
       "title": "Cloud",
+      "flattenOwnSection": true,
       "manifestUrl": "https://wso2.com/api-platform/docs-staging/cloud/product-nav-manifest.json"
     },
     "api-manager": {
@@ -61,6 +62,13 @@
       "manifestUrl": "https://wso2.com/api-platform/docs-staging/tools/product-nav-manifest.json"
     }
   },
+  "_deployments": [
+    { "title": "Cloud", "path": "cloud/", "products": ["cloud"], "default": true,
+      "banner": { "text": "Looking for the new API Platform Cloud documentation?",
+                  "linkText": "View the new docs", "path": "saas/" } },
+    { "title": "Self-managed", "path": "self-managed/",
+      "products": ["self-managed", "api-manager", "api-gateway", "ai-gateway", "api-portal", "ai-workspace"] }
+  ],
   "_liveSiteBase": "https://wso2.com/api-platform/docs-staging/",
   "_platformCommonBase": "https://wso2.com/api-platform/docs-staging/"
 }
