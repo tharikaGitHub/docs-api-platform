@@ -7,7 +7,7 @@ tags:
   - self-managed
   - platform-overview
 author: WSO2 API Platform Documentation Team
-last_updated: 2026-10-19
+last_updated: 2026-10-22
 content_type: "concept"
 ---
 
@@ -35,9 +35,8 @@ Because each component has its own release cycle, not every version of one compo
 
 ## Use your gateways with API Platform Cloud
 
-API Gateway and AI Gateway can also run in hybrid mode: the gateway runs on your infrastructure, and you manage it from API Platform Cloud. API Platform Cloud supports specific gateway versions in hybrid mode. For more information, see [API Platform Cloud](../cloud/platform/).
+API Gateway and AI Gateway can also run in hybrid mode: the gateway runs on your infrastructure, and you manage it from API Platform Cloud. API Platform Cloud supports specific gateway versions in hybrid mode. For more information, see [API Platform Cloud](../saas/){: target="_blank" rel="noopener" }.
 
 ## Choose where to start
 
-- To find a quick start guide for your goal, see [Get Started](../get-started.md).
-- To compare cloud, hybrid, and self-managed deployments, see the [platform overview](../index.md).
+To find a quick start guide for your goal, see [Get Started](../get-started.md).
