@@ -27,6 +27,7 @@ const sidebars = {
       doc("policies/overview", "Overview"),
       doc("policies/policy-hub", "Policy Hub"),
     ]),
+    doc("secret-management", "Secret Management"),
     doc("gen-ai-applications", "Gen AI Applications"),
     doc("configure-inbound-auth", "Configure Inbound Auth"),
     doc("invoke-via-sdk", "Invoke via SDK"),
