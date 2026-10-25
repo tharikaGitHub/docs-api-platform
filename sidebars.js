@@ -16,6 +16,7 @@ const sidebars = {
     doc("ai-agent-discovery", "AI Agent Discovery"),
     doc("consume-an-api", "Consume an API"),
     doc("manage-applications", "Manage Applications"),
+    doc("application-sharing", "Application Sharing"),
     doc("manage-subscriptions", "Manage Subscriptions"),
     doc("sdk-generation", "SDK Generation"),
     doc("api-workflows", "API Workflows"),
