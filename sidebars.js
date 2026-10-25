@@ -33,6 +33,7 @@ const sidebars = {
     doc("invoke-via-sdk", "Invoke via SDK"),
     doc("monetization", "Monetization"),
     doc("monitoring-and-analytics", "Monitoring and Analytics"),
+    doc("tools", "Tools"),
   ],
 };
 
