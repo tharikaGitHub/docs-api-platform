@@ -1,0 +1,3 @@
+---
+title: "Gen AI Applications"
+---
