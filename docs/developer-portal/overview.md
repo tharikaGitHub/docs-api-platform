@@ -10,12 +10,10 @@ The Developer Portal is where consumers find and use the APIs that your organiza
 
 | Task | Description |
 |:-----|:------------|
-| Discover APIs | [Search the API catalog](./discover-apis/searching.md) and [view an API's documentation](./discover-apis/documentation.md), including its endpoints, schemas, security, and base URL. |
-| Discover MCP servers | [Explore the MCP Hub](./discover-mcp-servers.md) to find MCP servers and view their tools, resources, and prompts. |
-| Discover AI agents | [Expose published APIs to AI agents](./ai-agent-discovery.md) through `llms.txt` and machine-readable endpoints. |
-| Manage applications | [Create an application](./manage-applications.md) that represents the app, service, or device that calls the APIs. |
-| Manage subscriptions | [Subscribe an application to an API](./manage-subscriptions.md) under a subscription plan. |
-| Consume an API | [Generate keys and invoke an API](./consume-an-api.md) secured with OAuth2 or an API key. |
+| Discover | [Search for APIs](./discover-apis/searching.md), [view an API's documentation](./discover-apis/documentation.md), [explore MCP servers](./discover-mcp-servers.md) in the MCP Hub, and let [AI agents](./ai-agent-discovery.md) discover your APIs through `llms.txt` and machine-readable endpoints. |
+| [Consume an API](./consume-an-api.md) | Generate keys and invoke an API secured with OAuth2 or an API key. |
+| [Manage Applications](./manage-applications.md) | Create an application that represents the app, service, or device that calls the APIs. |
+| [Manage Subscriptions](./manage-subscriptions.md) | Subscribe an application to an API under a subscription plan. |
 
 ## Consume an API
 
@@ -28,4 +26,4 @@ To use an API from the Developer Portal, follow these steps.
 
 ## Get Started
 
-To set up a Developer Portal and publish your first API to it, follow the [Quick Start Guide](./getting-started.md).
+To set up a Developer Portal and publish your first API to it, follow the [Quick Start Guide](./getting-started.md). To create and manage the portals of your organization, see [Manage Portals](../portals.md).
