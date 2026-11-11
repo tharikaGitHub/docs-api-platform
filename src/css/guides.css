@@ -1,0 +1,445 @@
+/**
+ * Guides overview and vendor guide pages, ported from the MkDocs theme
+ * (theme/material/assets/css/theme.css). The switches are built by
+ * src/clientModules/guidesSwitches.js.
+ *
+ * Material's .md-typeset is Docusaurus's .markdown. Material sizes are in rem
+ * of a 20px root; Docusaurus uses 16px, so rem values are scaled by 1.25.
+ */
+
+:root {
+  --guides-border: var(--apd-surface-border);
+  --guides-text: var(--ifm-font-color-base);
+  --guides-muted: var(--apd-text-muted);
+  --guides-accent: var(--apd-accent-text);
+  --guides-accent-hover: var(--ifm-link-hover-color);
+  --guides-tint: rgba(255, 115, 0, 0.12);
+  --guides-wash: rgba(255, 115, 0, 0.06);
+  --guides-radius: 8px;
+  --guides-radius-2x: 12px;
+  --guides-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+/* Hidden by the switches. Card and grid rules set display, which would
+   otherwise beat the hidden attribute. */
+.markdown [hidden]:not([hidden='until-found']),
+.table-of-contents li[hidden] {
+  display: none !important;
+}
+
+/* Guides overview: card grid */
+.markdown .cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  margin: 2.5rem 0;
+}
+
+.markdown .guides-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 1.25rem;
+  max-width: 1400px;
+  margin: 1.875rem 0 0;
+}
+
+@media screen and (max-width: 996px) {
+  .markdown .guides-cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.markdown .guides-cards .card {
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: subgrid;
+  margin: 0 0 3rem;
+  padding: 1.25rem;
+  max-width: none;
+  text-align: left;
+  border: 1px solid var(--guides-border);
+  border-radius: var(--guides-radius-2x);
+  background: linear-gradient(180deg, var(--guides-wash), transparent 12rem);
+  color: var(--guides-text);
+}
+
+.markdown .guides-cards .card:has(> h3:target) {
+  border-color: var(--guides-accent);
+}
+
+.markdown .guides-cards .card > h3 {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  font-weight: 700;
+}
+
+/* The heading's anchor link isn't needed inside a card. */
+.markdown .guides-cards .card > h3 > .hash-link {
+  display: none;
+}
+
+.markdown .guides-cards .card > hr {
+  margin: 1.25rem 0 0.9rem;
+}
+
+.markdown .guides-cards .card > p {
+  margin: 0 0 1.25rem;
+}
+
+.markdown .guides-cards .card > p:last-child {
+  margin-bottom: 0;
+}
+
+.markdown .guides-cards .card > h3 > svg {
+  flex: none;
+  width: 3rem;
+  height: 3rem;
+  padding: 0.625rem;
+  margin-right: 0.875rem;
+  border-radius: var(--guides-radius);
+  background-color: var(--guides-tint);
+  color: var(--guides-accent);
+}
+
+.markdown .guides-cards .card > ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.markdown .guides-cards .card > ul > li {
+  position: relative;
+  margin: 0;
+  padding: 0.875rem 1.125rem;
+  border: 1px solid var(--guides-border);
+  border-radius: var(--guides-radius);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.markdown .guides-cards .card > ul > li:hover {
+  transform: translateY(-2px);
+  border-color: var(--guides-accent);
+  box-shadow: var(--guides-shadow);
+}
+
+.markdown .guides-cards .card > ul > li > p {
+  margin: 0;
+}
+
+.markdown .guides-cards .card > ul > li > p:first-child a {
+  color: var(--guides-text);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.markdown .guides-cards .card > ul > li > p:first-child a:hover {
+  color: var(--guides-accent);
+}
+
+.markdown .guides-cards .card > ul > li > p:first-child a::before {
+  content: '\2192';
+  margin-right: 0.5rem;
+  color: var(--guides-accent);
+}
+
+/* The whole box is the link. */
+.markdown .guides-cards .card > ul > li > p:first-child a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.markdown .guides-cards .card > ul > li > p + p {
+  margin-top: 0.3rem;
+  color: var(--guides-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.markdown .guides-cards .card > p > a {
+  margin: 0;
+  color: var(--guides-accent);
+  font-weight: 700;
+}
+
+.markdown .guides-cards .card > p > a:hover {
+  color: var(--guides-accent-hover);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .markdown .guides-cards .card > ul > li {
+    transition: none;
+  }
+
+  .markdown .guides-cards .card > ul > li:hover {
+    transform: none;
+  }
+}
+
+/* Guides overview: "By use case" / "By service provider" switch */
+.markdown .guides-switch {
+  display: inline-flex;
+  margin: 0.5rem 0 0.75rem;
+  padding: 0.25rem;
+  border: 1px solid var(--guides-border);
+  border-radius: 999px;
+}
+
+.markdown .guides-switch[hidden] {
+  display: none;
+}
+
+.markdown .guides-switch [role='tab'] {
+  padding: 0.45rem 1.4rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--guides-muted);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.markdown .guides-switch [role='tab']:hover {
+  color: var(--guides-accent);
+}
+
+.markdown .guides-switch [role='tab'][aria-selected='true'] {
+  background-color: var(--guides-tint);
+  color: var(--guides-accent);
+}
+
+.markdown .guides-switch [role='tab']:focus-visible {
+  outline: 2px solid var(--guides-accent);
+  outline-offset: 2px;
+}
+
+/* With the switch active, each view's own heading would repeat the tab label;
+   keep it for screen readers, links, and the table of contents. */
+.markdown .guides-switch:not([hidden]) ~ .guides-view > h2 {
+  scroll-margin-top: 8rem;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.markdown .guides-group-label {
+  margin: 2rem 0 0;
+  color: var(--guides-muted);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .markdown .guides-switch [role='tab'] {
+    transition: none;
+  }
+}
+
+/* Vendor guide pages: end-to-end guides as a grid of linked boxes */
+.markdown .vendor-guide-list > ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+  gap: 0.9rem;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.markdown .vendor-guide-list > ul > li {
+  position: relative;
+  margin: 0;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--guides-border);
+  border-radius: var(--guides-radius-2x);
+  background: linear-gradient(180deg, var(--guides-wash), transparent 8rem);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.markdown .vendor-guide-list > ul > li:hover {
+  transform: translateY(-2px);
+  border-color: var(--guides-accent);
+  box-shadow: var(--guides-shadow);
+}
+
+.markdown .vendor-guide-list > ul > li > p {
+  margin: 0;
+}
+
+.markdown .vendor-guide-list > ul > li > p:first-child a {
+  color: var(--guides-text);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.markdown .vendor-guide-list > ul > li > p:first-child a:hover {
+  color: var(--guides-accent);
+}
+
+.markdown .vendor-guide-list > ul > li > p:first-child a::before {
+  content: '\2192';
+  margin-right: 0.5rem;
+  color: var(--guides-accent);
+}
+
+.markdown .vendor-guide-list > ul > li > p:first-child a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.markdown .vendor-guide-list > ul > li > p + p {
+  margin-top: 0.4rem;
+  color: var(--guides-muted);
+}
+
+.markdown .vendor-guide-list > ul > li > p:nth-child(3) {
+  margin-top: 0.6rem;
+  font-size: 0.875rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .markdown .vendor-guide-list > ul > li,
+  .markdown .vendor-guide-list > ul > li:hover {
+    transition: none;
+    transform: none;
+  }
+}
+
+/* Vendor guide pages: capability rows separated by a rule */
+.markdown .vendor-cap {
+  padding: 0.9rem 0;
+  border-top: 1px solid var(--guides-border);
+}
+
+.markdown .vendor-cap > h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: normal;
+}
+
+.markdown .vendor-cap > p {
+  margin: 0 0 0.5rem;
+}
+
+.markdown .vendor-cap > ul,
+.markdown .vendor-cap > .vendor-links > ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.markdown .vendor-cap > ul > li,
+.markdown .vendor-cap > .vendor-links > ul > li {
+  margin: 0.25rem 0 0;
+}
+
+/* Without the switch script, label each deployment-specific block so the
+   stacked links still make sense. */
+.markdown .vendor-links[data-deployments]::before {
+  display: block;
+  margin: 0.6rem 0 0.1rem;
+  color: var(--guides-muted);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.markdown .vendor-links[data-deployments='cloud']::before { content: 'Cloud'; }
+.markdown .vendor-links[data-deployments='hybrid']::before { content: 'Hybrid'; }
+.markdown .vendor-links[data-deployments='self-hosted']::before { content: 'Self-hosted'; }
+.markdown .vendor-links[data-deployments='cloud hybrid']::before { content: 'Cloud and Hybrid'; }
+.markdown .vendor-links[data-deployments='hybrid self-hosted']::before { content: 'Hybrid and Self-hosted'; }
+
+/* The script adds the class to the article (.markdown) */
+.markdown.vendor-deployments-on .vendor-links[data-deployments]::before {
+  display: none;
+}
+
+/* Vendor guide pages: deployment type switch */
+.markdown .vendor-deployment-switch {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 0.9rem;
+  margin: 1.875rem 0 0;
+}
+
+.markdown .vendor-deployment-switch__label {
+  color: var(--guides-muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.markdown .vendor-deployment-switch__options {
+  display: inline-flex;
+  padding: 0.25rem;
+  border: 1px solid var(--guides-border);
+  border-radius: 999px;
+}
+
+.markdown .vendor-deployment-switch button {
+  padding: 0.45rem 1.4rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--guides-muted);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.markdown .vendor-deployment-switch button:hover {
+  color: var(--guides-accent);
+}
+
+.markdown .vendor-deployment-switch button[aria-pressed='true'] {
+  background-color: var(--guides-tint);
+  color: var(--guides-accent);
+}
+
+.markdown .vendor-deployment-switch button:focus-visible {
+  outline: 2px solid var(--guides-accent);
+  outline-offset: 2px;
+}
+
+.markdown .vendor-deployment-switch__description {
+  margin: 0.6rem 0 0;
+  color: var(--guides-muted);
+  font-size: 0.875rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .markdown .vendor-deployment-switch button {
+    transition: none;
+  }
+}
+
+.markdown .vendor-meta {
+  margin-left: 0.5rem;
+  color: var(--guides-muted);
+  font-size: 0.875rem;
+}
+
+.markdown .vendor-meta::before {
+  content: '\00B7';
+  margin-right: 0.5rem;
+}
